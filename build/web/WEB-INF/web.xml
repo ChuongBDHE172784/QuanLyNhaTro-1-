@@ -4,69 +4,69 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-  <display-name>QuanLyNhaTro</display-name>
+    <display-name>QuanLyNhaTro</display-name>
 
-  <!-- DB config (demo) -->
-  <context-param>
-    <param-name>DB_URL</param-name>
-    <param-value>jdbc:sqlserver://localhost:1433;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>DB_USER</param-name>
-    <param-value>sa</param-value>
-  </context-param>
-  <context-param>
-    <param-name>DB_PASS</param-name>
-    <param-value>12345</param-value>
-  </context-param>
+    <!-- DB config -->
+    <context-param>
+        <param-name>DB_URL</param-name>
+        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_USER</param-name>
+        <param-value>sa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_PASS</param-name>
+        <param-value>12345</param-value>
+    </context-param>
 
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
-  <!-- Auth -->
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.nhatro.web.auth.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/auth/login</url-pattern>
-  </servlet-mapping>
+    <!-- Auth -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.nhatro.web.auth.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/auth/login</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.nhatro.web.auth.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/auth/logout</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.nhatro.web.auth.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/auth/logout</url-pattern>
+    </servlet-mapping>
 
-  <!-- Admin: Rooms CRUD -->
-  <servlet>
-    <servlet-name>AdminRoomServlet</servlet-name>
-    <servlet-class>com.nhatro.web.admin.AdminRoomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AdminRoomServlet</servlet-name>
-    <url-pattern>/admin/rooms</url-pattern>
-    <url-pattern>/admin/rooms/*</url-pattern>
-  </servlet-mapping>
+    <!-- Admin: Rooms CRUD -->
+    <servlet>
+        <servlet-name>AdminRoomServlet</servlet-name>
+        <servlet-class>com.nhatro.web.admin.AdminRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminRoomServlet</servlet-name>
+        <url-pattern>/admin/rooms</url-pattern>
+        <url-pattern>/admin/rooms/*</url-pattern>
+    </servlet-mapping>
 
-  <!-- Filters -->
-  <filter>
-    <filter-name>AuthzFilter</filter-name>
-    <filter-class>com.nhatro.web.filter.AuthzFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthzFilter</filter-name>
-    <url-pattern>/admin/*</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthzFilter</filter-name>
-    <url-pattern>/student/*</url-pattern>
-  </filter-mapping>
+    <!-- Filters -->
+    <filter>
+        <filter-name>AuthzFilter</filter-name>
+        <filter-class>com.nhatro.web.filter.AuthzFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthzFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthzFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+    </filter-mapping>
 
 </web-app>
 
