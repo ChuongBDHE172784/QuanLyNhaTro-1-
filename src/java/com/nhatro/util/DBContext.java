@@ -24,14 +24,14 @@ public final class DBContext {
 
     // Hàm main dùng để test kết nối DB khi chạy độc lập (không qua Servlet/Tomcat).
     public static void main(String[] args) {
-        String url = "jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true";
+        String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true";
         String user = "sa";
-        String pass = "12345";
+        String pass = "123";
         System.out.println("dang thu ket noi toi SQL Server...");
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
-                System.out.println("ket noi thanh cong! (auto-commit=" + con.getAutoCommit() + ")");
+                System.out.println("ket noi thanh cong!");
             }
         } catch (Exception e) {
             System.err.println("ket noi that bai:");
