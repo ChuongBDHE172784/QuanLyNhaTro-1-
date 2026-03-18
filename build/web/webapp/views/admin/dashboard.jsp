@@ -93,7 +93,7 @@
       <div class="card-body">
         <div class="fw-semibold mb-2">Tác vụ nhanh</div>
         <div class="d-grid gap-2">
-          <a class="btn btn-primary" href="${pageContext.request.contextPath}/webapp/views/admin/room-management.jsp">Quản lý phòng</a>
+          <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/rooms">Quản lý phòng</a>
           <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/webapp/views/admin/billing.jsp">Nhập điện/nước</a>
           <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/webapp/views/admin/tenant-management.jsp">Quản lý người thuê</a>
         </div>

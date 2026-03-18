@@ -1,15 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Chi tiết phòng" scope="request" />
 <jsp:include page="/webapp/views/common/header.jsp" />
 
-<c:set var="roomId" value="${empty param.id ? 1 : param.id}" />
-
 <nav aria-label="breadcrumb" class="mb-3">
   <ol class="breadcrumb mb-0">
-    <li class="breadcrumb-item"><a class="text-decoration-none" href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
-    <li class="breadcrumb-item"><a class="text-decoration-none" href="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp">Danh sách phòng</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Phòng P<c:out value="${roomId}" /></li>
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="${pageContext.request.contextPath}/home">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="${pageContext.request.contextPath}/rooms">Danh sách phòng</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><c:out value="${room.code}" /></li>
   </ol>
 </nav>
 
@@ -19,34 +18,34 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between gap-2">
           <div>
-            <h1 class="h4 fw-bold mb-1">Phòng P<c:out value="${roomId}" /></h1>
-            <div class="text-secondary">Khu A • 18m² • Full nội thất cơ bản</div>
+            <h1 class="h4 fw-bold mb-1"><c:out value="${room.code}" /></h1>
+            <div class="text-secondary"><c:out value="${room.area}" /></div>
           </div>
-          <span class="badge text-bg-success align-self-start">Còn trống</span>
+          <c:choose>
+            <c:when test="${room.status == 'AVAILABLE'}">
+              <span class="badge text-bg-success align-self-start">Còn trống</span>
+            </c:when>
+            <c:when test="${room.status == 'RENTED'}">
+              <span class="badge text-bg-secondary align-self-start">Đã thuê</span>
+            </c:when>
+            <c:otherwise>
+              <span class="badge text-bg-warning align-self-start">Bảo trì</span>
+            </c:otherwise>
+          </c:choose>
         </div>
         <hr />
         <div class="row g-2">
           <div class="col-6">
             <div class="small text-secondary">Giá/tháng</div>
-            <div class="fw-bold text-primary">2,500,000đ</div>
-          </div>
-          <div class="col-6">
-            <div class="small text-secondary">Đặt cọc</div>
-            <div class="fw-semibold">1 tháng</div>
-          </div>
-          <div class="col-6">
-            <div class="small text-secondary">Điện</div>
-            <div class="fw-semibold">3,500đ/kWh</div>
-          </div>
-          <div class="col-6">
-            <div class="small text-secondary">Nước</div>
-            <div class="fw-semibold">15,000đ/m³</div>
+            <div class="fw-bold text-primary">
+              <fmt:formatNumber value="${room.priceMonth}" type="number" groupingUsed="true" />đ
+            </div>
           </div>
         </div>
-        <hr />
-        <div class="small text-secondary">
-          Ghi chú: Nội dung demo UI. Khi làm backend, dữ liệu sẽ lấy từ DB (SQL Server) và render bằng JSTL.
-        </div>
+        <c:if test="${not empty room.description}">
+          <hr />
+          <div class="text-secondary"><c:out value="${room.description}" /></div>
+        </c:if>
       </div>
     </div>
   </div>
@@ -62,12 +61,9 @@
         <p class="text-secondary mb-3">
           Nhấn “Thuê ngay” để điền form đăng ký thuê. Nếu chưa đăng nhập, hệ thống sẽ chuyển về trang đăng nhập.
         </p>
-        <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${roomId}">
+        <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
           Thuê ngay
         </a>
-        <div class="small text-secondary mt-3">
-          (Demo) Luồng thật: Student chưa login → redirect `/auth/login`.
-        </div>
       </div>
     </div>
   </div>

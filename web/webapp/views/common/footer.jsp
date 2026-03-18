@@ -8,9 +8,9 @@
           © <%= java.time.Year.now() %> Nhà trọ SV — PRJ301 (Servlet/JSP)
         </div>
         <div class="small">
-          <a class="text-decoration-none" href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a>
+          <a class="text-decoration-none" href="${pageContext.request.contextPath}/home">Trang chủ</a>
           <span class="mx-2">•</span>
-          <a class="text-decoration-none" href="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp">Xem phòng</a>
+          <a class="text-decoration-none" href="${pageContext.request.contextPath}/rooms">Xem phòng</a>
         </div>
       </div>
     </footer>
