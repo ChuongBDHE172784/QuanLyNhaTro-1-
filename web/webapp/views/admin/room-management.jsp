@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ taglib prefix="ui" tagdir="/WEB-INF/tags/ui" %>
 <c:set var="pageTitle" value="Quản lý phòng" scope="request" />
 <jsp:include page="/webapp/views/common/header.jsp" />
@@ -44,32 +46,47 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="r" items="${requestScope.rooms}">
-            <tr>
-              <td><c:out value="${r.id}" /></td>
-              <td class="fw-semibold"><c:out value="${r.code}" /></td>
-              <td><c:out value="${r.area}" /></td>
-              <td class="text-end"><c:out value="${r.priceMonth}" />đ</td>
-              <td>
-                <span class="badge ${r.status == 'MAINTENANCE' ? 'text-bg-secondary' : (r.status == 'RENTED' ? 'text-bg-warning' : 'text-bg-success')}">
-                  <c:out value="${r.status}" />
-                </span>
-              </td>
-              <td class="text-end">
-                <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/rooms/edit?id=${r.id}">Sửa</a>
-                <form class="d-inline" action="${pageContext.request.contextPath}/admin/rooms/delete" method="post" onsubmit="return confirm('Xóa phòng này?');">
-                  <input type="hidden" name="id" value="${r.id}" />
-                  <button class="btn btn-sm btn-outline-danger" type="submit">Xóa</button>
-                </form>
-              </td>
-            </tr>
-          </c:forEach>
+          <c:choose>
+            <c:when test="${empty requestScope.rooms}">
+              <tr>
+                <td colspan="6" class="text-center text-secondary py-4">
+                  Chưa có phòng nào trong database.
+                </td>
+              </tr>
+            </c:when>
+            <c:otherwise>
+              <c:forEach var="r" items="${requestScope.rooms}">
+                <tr>
+                  <td><c:out value="${r.id}" /></td>
+                  <td class="fw-semibold"><c:out value="${r.code}" /></td>
+                  <td><c:out value="${r.area}" /></td>
+                  <td class="text-end">
+                    <fmt:formatNumber value="${r.priceMonth}" type="number" groupingUsed="true" />đ
+                  </td>
+                  <td>
+                    <span class="badge ${r.status == 'MAINTENANCE' ? 'text-bg-secondary' : (r.status == 'RENTED' ? 'text-bg-warning' : 'text-bg-success')}">
+                      <c:out value="${r.status}" />
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/rooms/edit?id=${r.id}">Sửa</a>
+                    <form class="d-inline" action="${pageContext.request.contextPath}/admin/rooms/delete" method="post" onsubmit="return confirm('Xóa phòng này?');">
+                      <input type="hidden" name="id" value="${r.id}" />
+                      <button class="btn btn-sm btn-outline-danger" type="submit">Xóa</button>
+                    </form>
+                  </td>
+                </tr>
+              </c:forEach>
+            </c:otherwise>
+          </c:choose>
         </tbody>
       </table>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mt-3">
-      <div class="small text-secondary">Hiển thị 1–10 / 48</div>
+      <div class="small text-secondary">
+        Tổng: <strong><c:out value="${fn:length(requestScope.rooms)}" /></strong> phòng
+      </div>
       <ui:pagination page="1" totalPages="1" baseUrl="${pageContext.request.contextPath}/admin/rooms" query="${requestScope.q}" />
     </div>
   </div>
@@ -96,10 +113,6 @@
           <div class="col-12 col-md-6">
             <label class="form-label">Khu</label>
             <input class="form-control" name="area" value="${editing ? room.area : ''}" placeholder="Khu A" required />
-          </div>
-          <div class="col-12 col-md-6">
-            <label class="form-label">Diện tích (m²)</label>
-            <input class="form-control" type="number" min="1" placeholder="18" />
           </div>
           <div class="col-12 col-md-6">
             <label class="form-label">Giá/tháng</label>

@@ -37,12 +37,12 @@ public class AuthzFilter implements Filter {
         }
 
         if (isAdminPath && u != null && !"ADMIN".equalsIgnoreCase(u.getRole())) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 
         if (isStudentPath && u != null && !"STUDENT".equalsIgnoreCase(u.getRole())) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 

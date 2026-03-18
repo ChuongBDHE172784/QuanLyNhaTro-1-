@@ -21,8 +21,28 @@
     </context-param>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
+
+    <!-- Guest: Home & Rooms -->
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.nhatro.web.guest.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GuestRoomServlet</servlet-name>
+        <servlet-class>com.nhatro.web.guest.GuestRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GuestRoomServlet</servlet-name>
+        <url-pattern>/rooms</url-pattern>
+        <url-pattern>/rooms/*</url-pattern>
+    </servlet-mapping>
 
     <!-- Auth -->
     <servlet>

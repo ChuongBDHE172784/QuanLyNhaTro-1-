@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Trang chủ" scope="request" />
 <jsp:include page="/webapp/views/common/header.jsp" />
 
@@ -13,7 +14,7 @@
       Xem phòng trống, giá thuê, tiện ích và gửi yêu cầu thuê trực tuyến.
     </p>
 
-    <form class="row g-2" action="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp" method="get">
+    <form class="row g-2" action="${pageContext.request.contextPath}/rooms" method="get">
       <div class="col-12 col-md-7">
         <input class="form-control form-control-lg" name="q" placeholder="Tìm theo khu vực, tên phòng..." />
       </div>
@@ -23,7 +24,7 @@
     </form>
 
     <div class="d-flex flex-wrap gap-2 mt-3">
-      <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp">Xem tất cả phòng</a>
+      <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/rooms">Xem tất cả phòng</a>
       <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/webapp/views/auth/login.jsp">Đăng nhập</a>
     </div>
   </div>
@@ -34,7 +35,7 @@
         <div class="d-flex align-items-center justify-content-between">
           <div>
             <div class="h5 mb-1 fw-bold">Thông tin nổi bật</div>
-            <div class="small text-secondary">Dữ liệu demo cho mục đích trình bày UI.</div>
+            <div class="small text-secondary">Thống kê nhanh từ hệ thống.</div>
           </div>
           <span class="badge text-bg-light">Cập nhật hôm nay</span>
         </div>
@@ -44,19 +45,32 @@
           <div class="col-12 col-md-4">
             <div class="border rounded-3 p-3 h-100">
               <div class="small text-secondary">Phòng trống</div>
-              <div class="h4 mb-0 fw-bold text-success">12</div>
+              <div class="h4 mb-0 fw-bold text-success">
+                <c:out value="${empty availableCount ? 0 : availableCount}" />
+              </div>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="border rounded-3 p-3 h-100">
               <div class="small text-secondary">Giá từ</div>
-              <div class="h4 mb-0 fw-bold">2.3tr</div>
+              <div class="h4 mb-0 fw-bold">
+                <c:choose>
+                  <c:when test="${empty minPrice}">
+                    —
+                  </c:when>
+                  <c:otherwise>
+                    <fmt:formatNumber value="${minPrice}" type="number" groupingUsed="true" />đ
+                  </c:otherwise>
+                </c:choose>
+              </div>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="border rounded-3 p-3 h-100">
               <div class="small text-secondary">Khu nhà</div>
-              <div class="h4 mb-0 fw-bold">A–C</div>
+              <div class="h4 mb-0 fw-bold">
+                <c:out value="${empty areaCount ? 0 : areaCount}" />
+              </div>
             </div>
           </div>
         </div>
@@ -72,36 +86,55 @@
 <div class="mt-4">
   <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
     <h2 class="h5 fw-bold mb-0">Phòng nổi bật</h2>
-    <a class="small text-decoration-none" href="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp">Xem thêm</a>
+    <a class="small text-decoration-none" href="${pageContext.request.contextPath}/rooms">Xem thêm</a>
   </div>
 
-  <div class="row g-3">
-    <c:forEach var="i" begin="1" end="3">
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start gap-2">
-              <div>
-                <div class="fw-semibold">Phòng P<c:out value="${i}" /></div>
-                <div class="small text-secondary">Khu A • 18m² • Gần trường</div>
+  <c:choose>
+    <c:when test="${empty featuredRooms}">
+      <div class="alert alert-secondary mb-0">Hiện chưa có phòng nào trong hệ thống.</div>
+    </c:when>
+    <c:otherwise>
+      <div class="row g-3">
+        <c:forEach var="r" items="${featuredRooms}">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-semibold"><c:out value="${r.code}" /></div>
+                    <div class="small text-secondary"><c:out value="${r.area}" /></div>
+                  </div>
+                  <c:choose>
+                    <c:when test="${r.status == 'AVAILABLE'}">
+                      <span class="badge text-bg-success">Còn trống</span>
+                    </c:when>
+                    <c:when test="${r.status == 'RENTED'}">
+                      <span class="badge text-bg-secondary">Đã thuê</span>
+                    </c:when>
+                    <c:otherwise>
+                      <span class="badge text-bg-warning">Bảo trì</span>
+                    </c:otherwise>
+                  </c:choose>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                  <div class="text-secondary small">Giá/tháng</div>
+                  <div class="fw-bold text-primary">
+                    <fmt:formatNumber value="${r.priceMonth}" type="number" groupingUsed="true" />đ
+                  </div>
+                </div>
               </div>
-              <span class="badge text-bg-success">Còn trống</span>
-            </div>
-            <hr />
-            <div class="d-flex justify-content-between">
-              <div class="text-secondary small">Giá/tháng</div>
-              <div class="fw-bold text-primary">2,500,000đ</div>
+              <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/rooms/detail?id=${r.id}">
+                  Xem chi tiết
+                </a>
+              </div>
             </div>
           </div>
-          <div class="card-footer bg-white border-0 pt-0 pb-3">
-            <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/guest/room-details.jsp?id=${i}">
-              Xem chi tiết
-            </a>
-          </div>
-        </div>
+        </c:forEach>
       </div>
-    </c:forEach>
-  </div>
+    </c:otherwise>
+  </c:choose>
 </div>
 
 <jsp:include page="/webapp/views/common/footer.jsp" />

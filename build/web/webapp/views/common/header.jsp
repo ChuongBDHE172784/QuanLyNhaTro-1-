@@ -19,7 +19,7 @@
   <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-        <a class="navbar-brand app-navbar-brand fw-semibold" href="${pageContext.request.contextPath}/index.jsp">
+        <a class="navbar-brand app-navbar-brand fw-semibold" href="${pageContext.request.contextPath}/home">
           Nhà trọ SV
         </a>
 
@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="appNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/guest/rooms.jsp">Xem phòng</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/rooms">Xem phòng</a>
             </li>
 
             <c:if test="${role == 'STUDENT'}">
@@ -53,7 +53,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/dashboard.jsp">Admin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/room-management.jsp">Phòng trọ</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/rooms">Phòng trọ</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/tenant-management.jsp">Người thuê</a>
