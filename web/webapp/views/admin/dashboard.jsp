@@ -69,7 +69,7 @@
                 <td>Nguyễn Văn A</td>
                 <td>18/03/2026</td>
                 <td class="text-end">
-                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/webapp/views/admin/request-approval.jsp">Duyệt</a>
+                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/requests">Duyệt</a>
                 </td>
               </tr>
               <tr>
@@ -78,7 +78,7 @@
                 <td>Trần Thị B</td>
                 <td>17/03/2026</td>
                 <td class="text-end">
-                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/webapp/views/admin/request-approval.jsp">Duyệt</a>
+                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/requests">Duyệt</a>
                 </td>
               </tr>
             </tbody>

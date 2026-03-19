@@ -9,7 +9,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Quản lý phòng trọ</h1>
-    <div class="text-secondary">CRUD phòng (UI demo).</div>
+    <div class="text-secondary">CRUD phòng (từ DB).</div>
   </div>
   <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#roomModal">
     Thêm mới
@@ -64,9 +64,17 @@
                     <fmt:formatNumber value="${r.priceMonth}" type="number" groupingUsed="true" />đ
                   </td>
                   <td>
-                    <span class="badge ${r.status == 'MAINTENANCE' ? 'text-bg-secondary' : (r.status == 'RENTED' ? 'text-bg-warning' : 'text-bg-success')}">
-                      <c:out value="${r.status}" />
-                    </span>
+                    <c:choose>
+                      <c:when test="${r.status == 'MAINTENANCE'}">
+                        <span class="badge text-bg-secondary app-status-badge">Bảo trì</span>
+                      </c:when>
+                      <c:when test="${r.status == 'RENTED'}">
+                        <span class="badge text-bg-warning app-status-badge">Đã thuê</span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="badge text-bg-success app-status-badge">Còn trống</span>
+                      </c:otherwise>
+                    </c:choose>
                   </td>
                   <td class="text-end">
                     <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/rooms/edit?id=${r.id}">Sửa</a>
@@ -108,15 +116,15 @@
           </c:if>
           <div class="col-12 col-md-6">
             <label class="form-label">Tên phòng</label>
-            <input class="form-control" name="code" value="${editing ? room.code : ''}" placeholder="P12" required />
+            <input class="form-control" name="code" maxlength="50" value="${editing ? room.code : ''}" placeholder="P12" required />
           </div>
           <div class="col-12 col-md-6">
             <label class="form-label">Khu</label>
-            <input class="form-control" name="area" value="${editing ? room.area : ''}" placeholder="Khu A" required />
+            <input class="form-control" name="area" maxlength="255" value="${editing ? room.area : ''}" placeholder="Khu A" required />
           </div>
           <div class="col-12 col-md-6">
             <label class="form-label">Giá/tháng</label>
-            <input class="form-control" name="priceMonth" value="${editing ? room.priceMonth : ''}" type="number" min="0" placeholder="2500000" required />
+            <input class="form-control" name="priceMonth" value="${editing ? room.priceMonth : ''}" type="number" min="0" step="10000" placeholder="2500000" required />
           </div>
           <div class="col-12 col-md-6">
             <label class="form-label">Trạng thái</label>
@@ -128,7 +136,7 @@
           </div>
           <div class="col-12">
             <label class="form-label">Mô tả</label>
-            <textarea class="form-control" name="description" rows="3" placeholder="Mô tả phòng...">${editing ? room.description : ''}</textarea>
+            <textarea class="form-control" name="description" maxlength="1000" rows="3" placeholder="Mô tả phòng...">${editing ? room.description : ''}</textarea>
           </div>
           <div class="col-12 d-grid">
             <button class="btn btn-primary" type="submit">Lưu</button>

@@ -14,7 +14,8 @@
           Phòng: <strong>P<c:out value="${roomId}" /></strong>
         </p>
 
-        <form action="#" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="${pageContext.request.contextPath}/student/requests/create" method="post" class="row g-3 needs-validation" novalidate>
+          <input type="hidden" name="roomId" value="${roomId}" />
           <div class="col-12 col-md-6">
             <label class="form-label" for="startDate">Ngày vào ở</label>
             <input class="form-control" type="date" id="startDate" name="startDate" required />
@@ -33,7 +34,7 @@
 
           <div class="col-12">
             <label class="form-label" for="note">Ghi chú</label>
-            <textarea class="form-control" id="note" name="note" rows="3" placeholder="Ví dụ: muốn xem phòng cuối tuần..."></textarea>
+            <textarea class="form-control" id="note" name="note" maxlength="1000" rows="3" placeholder="Ví dụ: muốn xem phòng cuối tuần..."></textarea>
           </div>
 
           <div class="col-12 d-grid">
@@ -42,7 +43,7 @@
         </form>
 
         <div class="alert alert-info mt-4 mb-0">
-          (Demo) Khi làm backend: submit → tạo “request thuê phòng” để Admin duyệt.
+          Submit sẽ tạo <strong>RoomRequest</strong> trong DB để Admin duyệt.
         </div>
       </div>
     </div>

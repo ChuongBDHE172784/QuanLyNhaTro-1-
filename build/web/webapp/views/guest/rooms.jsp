@@ -23,8 +23,8 @@
     <div class="row g-3">
       <c:forEach var="r" items="${rooms}">
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card h-100">
-            <div class="card-body">
+          <div class="card h-100 app-room-card">
+            <div class="card-body p-4">
               <div class="d-flex justify-content-between align-items-start gap-2">
                 <div>
                   <div class="fw-semibold"><c:out value="${r.code}" /></div>
@@ -32,13 +32,13 @@
                 </div>
                 <c:choose>
                   <c:when test="${r.status == 'AVAILABLE'}">
-                    <span class="badge text-bg-success">Còn trống</span>
+                    <span class="badge text-bg-success app-status-badge">Còn trống</span>
                   </c:when>
                   <c:when test="${r.status == 'RENTED'}">
-                    <span class="badge text-bg-secondary">Đã thuê</span>
+                    <span class="badge text-bg-secondary app-status-badge">Đã thuê</span>
                   </c:when>
                   <c:otherwise>
-                    <span class="badge text-bg-warning">Bảo trì</span>
+                    <span class="badge text-bg-warning app-status-badge">Bảo trì</span>
                   </c:otherwise>
                 </c:choose>
               </div>
@@ -50,7 +50,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-footer bg-white border-0 pt-0 pb-3">
+            <div class="card-footer bg-white border-0 pt-0 pb-4">
               <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/rooms/detail?id=${r.id}">
                 Xem chi tiết
               </a>

@@ -62,7 +62,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/billing.jsp">Hóa đơn &amp; Dịch vụ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/request-approval.jsp">Yêu cầu</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/requests">Yêu cầu</a>
               </li>
             </c:if>
           </ul>

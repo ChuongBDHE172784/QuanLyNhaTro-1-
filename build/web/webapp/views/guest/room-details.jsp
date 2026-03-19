@@ -61,9 +61,24 @@
         <p class="text-secondary mb-3">
           Nhấn “Thuê ngay” để điền form đăng ký thuê. Nếu chưa đăng nhập, hệ thống sẽ chuyển về trang đăng nhập.
         </p>
-        <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
-          Thuê ngay
-        </a>
+        <c:choose>
+          <c:when test="${room.status == 'AVAILABLE'}">
+            <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
+              Thuê ngay
+            </a>
+            <div class="small text-secondary mt-3">
+              Gửi yêu cầu và chờ Admin duyệt.
+            </div>
+          </c:when>
+          <c:otherwise>
+            <button class="btn btn-secondary w-100" type="button" disabled>
+              Phòng không thể thuê
+            </button>
+            <div class="small text-secondary mt-3">
+              Hiện trạng: <strong><c:out value="${room.status}" /></strong>
+            </div>
+          </c:otherwise>
+        </c:choose>
       </div>
     </div>
   </div>
