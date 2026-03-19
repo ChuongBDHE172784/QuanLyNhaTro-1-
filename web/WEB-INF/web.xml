@@ -9,7 +9,7 @@
     <!-- DB config -->
     <context-param>
         <param-name>DB_URL</param-name>
-        <param-value>jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
     </context-param>
     <context-param>
         <param-name>DB_USER</param-name>
@@ -17,7 +17,7 @@
     </context-param>
     <context-param>
         <param-name>DB_PASS</param-name>
-        <param-value>123</param-value>
+        <param-value>12345</param-value>
     </context-param>
 
     <welcome-file-list>
@@ -27,7 +27,7 @@
     <!-- Guest: Home & Rooms -->
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>com.nhatro.web.guest.HomeServlet</servlet-class>
+        <servlet-class>nhatro.web.guest.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>GuestRoomServlet</servlet-name>
-        <servlet-class>com.nhatro.web.guest.GuestRoomServlet</servlet-class>
+        <servlet-class>nhatro.web.guest.GuestRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GuestRoomServlet</servlet-name>
@@ -47,7 +47,7 @@
     <!-- Auth -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.nhatro.web.auth.LoginServlet</servlet-class>
+        <servlet-class>nhatro.web.auth.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -56,7 +56,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.nhatro.web.auth.LogoutServlet</servlet-class>
+        <servlet-class>nhatro.web.auth.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -66,7 +66,7 @@
     <!-- Admin: Rooms CRUD -->
     <servlet>
         <servlet-name>AdminRoomServlet</servlet-name>
-        <servlet-class>com.nhatro.web.admin.AdminRoomServlet</servlet-class>
+        <servlet-class>nhatro.web.admin.AdminRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminRoomServlet</servlet-name>
@@ -74,10 +74,48 @@
         <url-pattern>/admin/rooms/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Student: Create room booking request -->
+    <servlet>
+        <servlet-name>RoomBookingRequestServlet</servlet-name>
+        <servlet-class>nhatro.web.student.RoomBookingRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoomBookingRequestServlet</servlet-name>
+        <url-pattern>/student/requests/create</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin: Approve/reject requests + create Contracts + update Room status -->
+    <servlet>
+        <servlet-name>AdminRequestsServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.AdminRequestsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminRequestsServlet</servlet-name>
+        <url-pattern>/admin/requests</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ApproveRoomRequestServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.ApproveRoomRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApproveRoomRequestServlet</servlet-name>
+        <url-pattern>/admin/requests/approve</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RejectRoomRequestServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.RejectRoomRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RejectRoomRequestServlet</servlet-name>
+        <url-pattern>/admin/requests/reject</url-pattern>
+    </servlet-mapping>
+
     <!-- Filters -->
     <filter>
         <filter-name>AuthzFilter</filter-name>
-        <filter-class>com.nhatro.web.filter.AuthzFilter</filter-class>
+        <filter-class>nhatro.web.filter.AuthzFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthzFilter</filter-name>
