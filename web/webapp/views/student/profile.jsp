@@ -15,32 +15,30 @@
 
     <div class="card app-card">
       <div class="card-body p-4">
-        <form action="#" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="${pageContext.request.contextPath}/student/profile" method="post" class="row g-3 needs-validation" novalidate>
           <div class="col-12 col-md-6">
             <label class="form-label" for="fullName">Họ và tên</label>
-            <input class="form-control" id="fullName" name="fullName" value="Nguyễn Văn A" required />
+            <input class="form-control" id="fullName" name="fullName" value="<c:out value='${sessionScope.user.fullName}' />" readonly />
             <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
           </div>
           <div class="col-12 col-md-6">
-            <label class="form-label" for="studentId">Mã sinh viên</label>
-            <input class="form-control" id="studentId" name="studentId" value="SE000001" required />
-            <div class="invalid-feedback">Vui lòng nhập mã sinh viên.</div>
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" id="email" name="email" value="<c:out value='${sessionScope.user.email}' />" readonly />
+            <div class="invalid-feedback">Vui lòng nhập email.</div>
           </div>
 
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" value="sv@example.com" required />
-            <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
-          </div>
           <div class="col-12 col-md-6">
             <label class="form-label" for="phone">Số điện thoại</label>
-            <input class="form-control" id="phone" name="phone" value="0900000000" required />
+            <input class="form-control" id="phone" name="phone" value="<c:out value='${profile.phone}' />" />
             <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
           </div>
-
           <div class="col-12">
-            <label class="form-label" for="address">Địa chỉ</label>
-            <input class="form-control" id="address" name="address" placeholder="Số nhà, đường, phường/xã..." />
+            <label class="form-label" for="cccd">CCCD</label>
+            <input class="form-control" id="cccd" name="cccd" value="<c:out value='${profile.cccd}' />" />
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="avatarUrl">Ảnh cá nhân (URL)</label>
+            <input class="form-control" id="avatarUrl" name="avatarUrl" value="<c:out value='${profile.avatarUrl}' />" />
           </div>
 
           <div class="col-12 d-grid d-md-flex justify-content-md-end gap-2">

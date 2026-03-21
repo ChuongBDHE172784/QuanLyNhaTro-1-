@@ -18,7 +18,7 @@ public class AdminRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            List<RoomRequest> requests = roomRequestDAO.listPending(getServletContext());
+            List<RoomRequest> requests = roomRequestDAO.listForAdmin(getServletContext());
             req.setAttribute("requests", requests);
             req.getRequestDispatcher("/webapp/views/admin/request-approval.jsp").forward(req, resp);
         } catch (SQLException e) {

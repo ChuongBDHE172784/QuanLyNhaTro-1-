@@ -11,9 +11,11 @@ public class RoomRequest {
     private String studentName;
 
     private LocalDate startDate;
+    private LocalDate moveInDate;
     private int durationMonths;
+    private int peopleCount;
     private String note;
-    private String status; // PENDING | APPROVED | REJECTED
+    private String status; // PENDING | APPROVED | CHECKED_IN | REJECTED
 
     public int getId() {
         return id;
@@ -63,12 +65,28 @@ public class RoomRequest {
         this.startDate = startDate;
     }
 
+    public LocalDate getMoveInDate() {
+        return moveInDate;
+    }
+
+    public void setMoveInDate(LocalDate moveInDate) {
+        this.moveInDate = moveInDate;
+    }
+
     public int getDurationMonths() {
         return durationMonths;
     }
 
     public void setDurationMonths(int durationMonths) {
         this.durationMonths = durationMonths;
+    }
+
+    public int getPeopleCount() {
+        return peopleCount;
+    }
+
+    public void setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
     }
 
     public String getNote() {

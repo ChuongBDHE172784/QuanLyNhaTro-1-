@@ -15,24 +15,14 @@
 
     <div class="card app-card">
       <div class="card-body p-4">
-        <form action="#" method="post" class="row g-3 needs-validation" novalidate>
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="type">Loại yêu cầu</label>
-            <select class="form-select" id="type" name="type" required>
-              <option value="" selected disabled>Chọn...</option>
-              <option>Điện</option>
-              <option>Nước</option>
-              <option>Hỏng thiết bị</option>
-              <option>Khác</option>
-            </select>
-            <div class="invalid-feedback">Vui lòng chọn loại yêu cầu.</div>
-          </div>
+        <form action="${pageContext.request.contextPath}/student/reports" method="post" class="row g-3 needs-validation" novalidate>
           <div class="col-12 col-md-6">
             <label class="form-label" for="priority">Mức độ</label>
             <select class="form-select" id="priority" name="priority" required>
               <option value="" selected disabled>Chọn...</option>
-              <option>Bình thường</option>
-              <option>Gấp</option>
+              <option value="LOW">Thấp</option>
+              <option value="MEDIUM">Trung bình</option>
+              <option value="HIGH">Cao</option>
             </select>
             <div class="invalid-feedback">Vui lòng chọn mức độ.</div>
           </div>
@@ -55,30 +45,26 @@
         </form>
 
         <hr class="my-4" />
-        <div class="fw-semibold mb-2">Lịch sử yêu cầu (demo)</div>
+        <div class="fw-semibold mb-2">Lịch sử báo cáo</div>
         <div class="table-responsive">
           <table class="table align-middle mb-0">
             <thead>
               <tr>
                 <th>Mã</th>
                 <th>Tiêu đề</th>
-                <th>Ngày</th>
+                <th>Mức độ</th>
                 <th>Trạng thái</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#SUP-102</td>
-                <td>Đèn hành lang chập chờn</td>
-                <td>12/03/2026</td>
-                <td><span class="badge text-bg-warning">Đang xử lý</span></td>
-              </tr>
-              <tr>
-                <td>#SUP-101</td>
-                <td>Vòi nước rò rỉ</td>
-                <td>05/03/2026</td>
-                <td><span class="badge text-bg-success">Đã xử lý</span></td>
-              </tr>
+              <c:forEach var="r" items="${reports}">
+                <tr>
+                  <td>#RPT-<c:out value="${r.id}" /></td>
+                  <td><c:out value="${r.title}" /></td>
+                  <td><c:out value="${r.priority}" /></td>
+                  <td><span class="badge text-bg-secondary"><c:out value="${r.status}" /></span></td>
+                </tr>
+              </c:forEach>
             </tbody>
           </table>
         </div>

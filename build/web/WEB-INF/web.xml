@@ -84,6 +84,42 @@
         <url-pattern>/student/requests/create</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <servlet-class>nhatro.web.student.StudentProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <url-pattern>/student/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentReportServlet</servlet-name>
+        <servlet-class>nhatro.web.student.StudentReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentReportServlet</servlet-name>
+        <url-pattern>/student/reports</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <servlet-class>nhatro.web.student.StudentProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <url-pattern>/student/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentReportServlet</servlet-name>
+        <servlet-class>nhatro.web.student.StudentReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentReportServlet</servlet-name>
+        <url-pattern>/student/reports</url-pattern>
+    </servlet-mapping>
+
     <!-- Admin: Approve/reject requests + create Contracts + update Room status -->
     <servlet>
         <servlet-name>AdminRequestsServlet</servlet-name>
@@ -110,6 +146,42 @@
     <servlet-mapping>
         <servlet-name>RejectRoomRequestServlet</servlet-name>
         <url-pattern>/admin/requests/reject</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckInRoomRequestServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.CheckInRoomRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckInRoomRequestServlet</servlet-name>
+        <url-pattern>/admin/requests/checkin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminReportServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.AdminReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminReportServlet</servlet-name>
+        <url-pattern>/admin/reports</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckInRoomRequestServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.CheckInRoomRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckInRoomRequestServlet</servlet-name>
+        <url-pattern>/admin/requests/checkin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminReportServlet</servlet-name>
+        <servlet-class>nhatro.web.admin.AdminReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminReportServlet</servlet-name>
+        <url-pattern>/admin/reports</url-pattern>
     </servlet-mapping>
 
     <!-- Filters -->

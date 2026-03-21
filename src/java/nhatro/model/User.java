@@ -7,6 +7,9 @@ public class User implements Serializable {
     private String email;
     private String fullName;
     private String role; // ADMIN | STUDENT
+    private String phone;
+    private String cccd;
+    private String avatarUrl;
 
     public User() {
     }
@@ -48,6 +51,30 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
 

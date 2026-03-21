@@ -37,7 +37,9 @@
             <th>Mã</th>
             <th>Phòng</th>
             <th>Sinh viên</th>
-            <th>Ngày gửi</th>
+            <th>Ngày vào ở</th>
+            <th>Số người</th>
+            <th>Trạng thái</th>
             <th>Ghi chú</th>
             <th class="text-end"></th>
           </tr>
@@ -46,7 +48,7 @@
           <c:choose>
             <c:when test="${empty requests}">
               <tr>
-                <td colspan="6" class="text-center text-secondary py-4">Không có yêu cầu chờ duyệt.</td>
+                <td colspan="8" class="text-center text-secondary py-4">Không có yêu cầu.</td>
               </tr>
             </c:when>
             <c:otherwise>
@@ -55,17 +57,27 @@
                   <td>#REQ-<c:out value="${r.id}" /></td>
                   <td class="fw-semibold"><c:out value="${r.roomCode}" /></td>
                   <td><c:out value="${r.studentName}" /></td>
-                  <td><c:out value="${r.startDate}" /></td>
+                  <td><c:out value="${r.moveInDate}" /></td>
+                  <td><c:out value="${r.peopleCount}" /></td>
+                  <td><span class="badge text-bg-info"><c:out value="${r.status}" /></span></td>
                   <td class="text-secondary"><c:out value="${r.note}" /></td>
                   <td class="text-end">
-                    <form class="d-inline" action="${pageContext.request.contextPath}/admin/requests/approve" method="post">
-                      <input type="hidden" name="requestId" value="${r.id}" />
-                      <button class="btn btn-sm btn-success" type="submit">Duyệt</button>
-                    </form>
-                    <form class="d-inline ms-2" action="${pageContext.request.contextPath}/admin/requests/reject" method="post">
-                      <input type="hidden" name="requestId" value="${r.id}" />
-                      <button class="btn btn-sm btn-outline-danger" type="submit">Từ chối</button>
-                    </form>
+                    <c:if test="${r.status == 'PENDING'}">
+                      <form class="d-inline" action="${pageContext.request.contextPath}/admin/requests/approve" method="post">
+                        <input type="hidden" name="requestId" value="${r.id}" />
+                        <button class="btn btn-sm btn-success" type="submit">Duyệt</button>
+                      </form>
+                      <form class="d-inline ms-2" action="${pageContext.request.contextPath}/admin/requests/reject" method="post">
+                        <input type="hidden" name="requestId" value="${r.id}" />
+                        <button class="btn btn-sm btn-outline-danger" type="submit">Từ chối</button>
+                      </form>
+                    </c:if>
+                    <c:if test="${r.status == 'APPROVED'}">
+                      <form class="d-inline" action="${pageContext.request.contextPath}/admin/requests/checkin" method="post">
+                        <input type="hidden" name="requestId" value="${r.id}" />
+                        <button class="btn btn-sm btn-primary" type="submit">Đã nhận phòng</button>
+                      </form>
+                    </c:if>
                   </td>
                 </tr>
               </c:forEach>

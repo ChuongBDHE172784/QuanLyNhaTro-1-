@@ -28,18 +28,20 @@ public class RoomBookingRequestServlet extends HttpServlet {
 
         try {
             String roomIdStr = req.getParameter("roomId");
-            String startDateStr = req.getParameter("startDate");
+            String moveInDateStr = req.getParameter("moveInDate");
             String durationStr = req.getParameter("duration");
+            String peopleCountStr = req.getParameter("peopleCount");
             String note = req.getParameter("note");
 
-            if (roomIdStr == null || startDateStr == null || durationStr == null) {
+            if (roomIdStr == null || moveInDateStr == null || durationStr == null || peopleCountStr == null) {
                 resp.sendRedirect(req.getContextPath() + "/rooms");
                 return;
             }
 
             int roomId = parsePositiveInt(roomIdStr, "roomId");
-            LocalDate startDate = parseDate(startDateStr);
+            LocalDate moveInDate = parseDate(moveInDateStr);
             int durationMonths = parsePositiveInt(durationStr, "duration");
+            int peopleCount = parsePositiveInt(peopleCountStr, "peopleCount");
             if (durationMonths > 120) {
                 throw new IllegalArgumentException("duration too large");
             }
@@ -50,8 +52,9 @@ public class RoomBookingRequestServlet extends HttpServlet {
                     getServletContext(),
                     u.getId(),
                     roomId,
-                    startDate,
+                    moveInDate,
                     durationMonths,
+                    peopleCount,
                     noteValue
             );
 

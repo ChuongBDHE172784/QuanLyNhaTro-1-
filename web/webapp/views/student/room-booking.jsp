@@ -17,8 +17,8 @@
         <form action="${pageContext.request.contextPath}/student/requests/create" method="post" class="row g-3 needs-validation" novalidate>
           <input type="hidden" name="roomId" value="${roomId}" />
           <div class="col-12 col-md-6">
-            <label class="form-label" for="startDate">Ngày vào ở</label>
-            <input class="form-control" type="date" id="startDate" name="startDate" required />
+            <label class="form-label" for="moveInDate">Ngày dự kiến chuyển đến</label>
+            <input class="form-control" type="date" id="moveInDate" name="moveInDate" required />
             <div class="invalid-feedback">Vui lòng chọn ngày vào ở.</div>
           </div>
           <div class="col-12 col-md-6">
@@ -30,6 +30,11 @@
               <option>12</option>
             </select>
             <div class="invalid-feedback">Vui lòng chọn thời hạn.</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="peopleCount">Số người ở</label>
+            <input class="form-control" type="number" min="1" max="20" id="peopleCount" name="peopleCount" required />
+            <div class="invalid-feedback">Vui lòng nhập số người ở.</div>
           </div>
 
           <div class="col-12">

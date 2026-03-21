@@ -30,10 +30,18 @@ public class GuestRoomServlet extends HttpServlet {
 
     private void handleList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String q = req.getParameter("q");
+        Integer minPrice = parseOptionalInt(req.getParameter("minPrice"));
+        Integer maxPrice = parseOptionalInt(req.getParameter("maxPrice"));
+        String roomType = req.getParameter("roomType");
+        String utility = req.getParameter("utility");
         try {
-            List<Room> rooms = roomDAO.list(getServletContext(), q);
+            List<Room> rooms = roomDAO.listFiltered(getServletContext(), q, minPrice, maxPrice, roomType, utility);
             req.setAttribute("rooms", rooms);
             req.setAttribute("q", q);
+            req.setAttribute("minPrice", minPrice);
+            req.setAttribute("maxPrice", maxPrice);
+            req.setAttribute("roomType", roomType);
+            req.setAttribute("utility", utility);
             req.getRequestDispatcher("/webapp/views/guest/rooms.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException("DB error", e);
@@ -60,6 +68,17 @@ public class GuestRoomServlet extends HttpServlet {
             req.getRequestDispatcher("/webapp/views/guest/room-details.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException("DB error", e);
+        }
+    }
+
+    private Integer parseOptionalInt(String s) {
+        if (s == null || s.isBlank()) {
+            return null;
+        }
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return null;
         }
     }
 }

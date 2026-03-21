@@ -41,10 +41,10 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/student/invoices.jsp">Hóa đơn</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/student/support.jsp">Hỗ trợ</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/student/reports">Hỗ trợ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/student/profile.jsp">Thông tin</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/student/profile">Thông tin</a>
               </li>
             </c:if>
 
@@ -63,6 +63,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/requests">Yêu cầu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/reports">Sự cố</a>
               </li>
             </c:if>
           </ul>
@@ -94,7 +97,7 @@
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <c:if test="${role == 'STUDENT'}">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/webapp/views/student/profile.jsp">Hồ sơ</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/student/profile">Hồ sơ</a></li>
                   </c:if>
                   <c:if test="${role == 'ADMIN'}">
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/webapp/views/admin/dashboard.jsp">Admin Dashboard</a></li>

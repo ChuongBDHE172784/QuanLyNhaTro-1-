@@ -9,6 +9,8 @@ public class Room implements Serializable {
     private int priceMonth;
     private String status; // AVAILABLE | RENTED | MAINTENANCE
     private String description;
+    private String roomType;
+    private String utilitiesSummary;
 
     public Room() {
     }
@@ -20,6 +22,17 @@ public class Room implements Serializable {
         this.priceMonth = priceMonth;
         this.status = status;
         this.description = description;
+    }
+
+    public Room(int id, String code, String area, int priceMonth, String status, String description, String roomType, String utilitiesSummary) {
+        this.id = id;
+        this.code = code;
+        this.area = area;
+        this.priceMonth = priceMonth;
+        this.status = status;
+        this.description = description;
+        this.roomType = roomType;
+        this.utilitiesSummary = utilitiesSummary;
     }
 
     public int getId() {
@@ -68,6 +81,22 @@ public class Room implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public String getUtilitiesSummary() {
+        return utilitiesSummary;
+    }
+
+    public void setUtilitiesSummary(String utilitiesSummary) {
+        this.utilitiesSummary = utilitiesSummary;
     }
 }
 

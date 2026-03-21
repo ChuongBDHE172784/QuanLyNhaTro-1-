@@ -9,9 +9,29 @@
     <h1 class="h4 fw-bold mb-1">Danh sách phòng trọ</h1>
     <div class="text-secondary">Chọn phòng phù hợp và xem chi tiết.</div>
   </div>
-  <form class="d-flex gap-2" action="${pageContext.request.contextPath}/rooms" method="get" role="search">
-    <input class="form-control" name="q" placeholder="Tìm theo tên/khu vực..." value="<c:out value='${q}' />" />
-    <button class="btn btn-outline-primary" type="submit">Tìm</button>
+  <form class="row g-2" action="${pageContext.request.contextPath}/rooms" method="get" role="search">
+    <div class="col-12 col-md-4">
+      <input class="form-control" name="q" placeholder="Tìm theo mã/khu vực..." value="<c:out value='${q}' />" />
+    </div>
+    <div class="col-6 col-md-2">
+      <input class="form-control" type="number" min="0" name="minPrice" placeholder="Giá từ" value="<c:out value='${minPrice}' />" />
+    </div>
+    <div class="col-6 col-md-2">
+      <input class="form-control" type="number" min="0" name="maxPrice" placeholder="Đến" value="<c:out value='${maxPrice}' />" />
+    </div>
+    <div class="col-6 col-md-2">
+      <select class="form-select" name="roomType">
+        <option value="">Loại phòng</option>
+        <option value="SINGLE" ${roomType == 'SINGLE' ? 'selected' : ''}>Phòng đơn</option>
+        <option value="STUDIO" ${roomType == 'STUDIO' ? 'selected' : ''}>Chung cư mini</option>
+      </select>
+    </div>
+    <div class="col-6 col-md-2">
+      <input class="form-control" name="utility" placeholder="Tiện ích" value="<c:out value='${utility}' />" />
+    </div>
+    <div class="col-12 d-grid d-md-block">
+      <button class="btn btn-outline-primary" type="submit">Lọc nhanh</button>
+    </div>
   </form>
 </div>
 
@@ -48,6 +68,12 @@
                 <div class="fw-bold text-primary">
                   <fmt:formatNumber value="${r.priceMonth}" type="number" groupingUsed="true" />đ
                 </div>
+              </div>
+              <div class="small text-secondary mt-2">
+                Loại: <strong><c:out value="${empty r.roomType ? 'SINGLE' : r.roomType}" /></strong>
+              </div>
+              <div class="small text-secondary">
+                Tiện ích: <c:out value="${empty r.utilitiesSummary ? 'Chưa cập nhật' : r.utilitiesSummary}" />
               </div>
             </div>
             <div class="card-footer bg-white border-0 pt-0 pb-4">

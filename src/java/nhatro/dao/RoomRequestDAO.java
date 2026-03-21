@@ -14,21 +14,21 @@ import static nhatro.util.DBContext.getConnection;
 
 public class RoomRequestDAO {
 
-    public List<RoomRequest> listPending(ServletContext ctx) throws SQLException {
+    public List<RoomRequest> listForAdmin(ServletContext ctx) throws SQLException {
         String sql = """
                 SELECT rr.id,
                        rr.room_id,
                        rm.code AS room_code,
                        rr.user_id,
                        u.full_name AS student_name,
-                       rr.start_date,
+                       rr.move_in_date,
                        rr.duration_months,
+                       rr.people_count,
                        rr.note,
                        rr.status
                 FROM dbo.RoomRequests rr
                 INNER JOIN dbo.Room rm ON rm.id = rr.room_id
                 INNER JOIN dbo.[User] u ON u.id = rr.user_id
-                WHERE rr.status = 'PENDING'
                 ORDER BY rr.created_at DESC
                 """;
 
@@ -43,10 +43,12 @@ public class RoomRequestDAO {
                     r.setUserId(rs.getInt("user_id"));
                     r.setStudentName(rs.getString("student_name"));
 
-                    java.sql.Date start = rs.getDate("start_date");
-                    r.setStartDate(start == null ? null : start.toLocalDate());
+                    java.sql.Date start = rs.getDate("move_in_date");
+                    r.setMoveInDate(start == null ? null : start.toLocalDate());
+                    r.setStartDate(r.getMoveInDate());
 
                     r.setDurationMonths(rs.getInt("duration_months"));
+                    r.setPeopleCount(rs.getInt("people_count"));
                     r.setNote(rs.getString("note"));
                     r.setStatus(rs.getString("status"));
                     list.add(r);
@@ -56,15 +58,18 @@ public class RoomRequestDAO {
         }
     }
 
-    public void create(ServletContext ctx, int userId, int roomId, LocalDate startDate, int durationMonths, String note) throws SQLException {
+    public void create(ServletContext ctx, int userId, int roomId, LocalDate moveInDate, int durationMonths, int peopleCount, String note) throws SQLException {
         if (userId <= 0 || roomId <= 0) {
             throw new IllegalArgumentException("Invalid userId/roomId");
         }
-        if (startDate == null) {
-            throw new IllegalArgumentException("Missing startDate");
+        if (moveInDate == null) {
+            throw new IllegalArgumentException("Missing moveInDate");
         }
         if (durationMonths <= 0) {
             throw new IllegalArgumentException("Invalid durationMonths");
+        }
+        if (peopleCount <= 0 || peopleCount > 20) {
+            throw new IllegalArgumentException("Invalid peopleCount");
         }
 
         // Kiểm tra phòng còn trống để request không bị "treo" vô lý.
@@ -92,15 +97,16 @@ public class RoomRequestDAO {
         }
 
         String sql = """
-                INSERT INTO dbo.RoomRequests(user_id, room_id, start_date, duration_months, note)
-                VALUES (?,?,?,?,?)
+                INSERT INTO dbo.RoomRequests(user_id, room_id, move_in_date, duration_months, people_count, note)
+                VALUES (?,?,?,?,?,?)
                 """;
         try (Connection con = getConnection(ctx); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ps.setInt(2, roomId);
-            ps.setDate(3, java.sql.Date.valueOf(startDate));
+            ps.setDate(3, java.sql.Date.valueOf(moveInDate));
             ps.setInt(4, durationMonths);
-            ps.setString(5, note);
+            ps.setInt(5, peopleCount);
+            ps.setString(6, note);
             ps.executeUpdate();
         }
     }
@@ -111,7 +117,7 @@ public class RoomRequestDAO {
         }
 
         String fetchSql = """
-                SELECT user_id, room_id, start_date, duration_months
+                SELECT user_id, room_id, move_in_date, duration_months
                 FROM dbo.RoomRequests
                 WHERE id = ? AND status = 'PENDING'
                 """;
@@ -140,7 +146,7 @@ public class RoomRequestDAO {
                         }
                         userId = rs.getInt("user_id");
                         roomId = rs.getInt("room_id");
-                        java.sql.Date start = rs.getDate("start_date");
+                        java.sql.Date start = rs.getDate("move_in_date");
                         startDate = start == null ? LocalDate.now() : start.toLocalDate();
                         durationMonths = rs.getInt("duration_months");
                     }
@@ -194,6 +200,17 @@ public class RoomRequestDAO {
             throw new IllegalArgumentException("Invalid requestId");
         }
         String sql = "UPDATE dbo.RoomRequests SET status = 'REJECTED' WHERE id = ? AND status = 'PENDING'";
+        try (Connection con = getConnection(ctx); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, requestId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void markCheckedIn(ServletContext ctx, int requestId) throws SQLException {
+        if (requestId <= 0) {
+            throw new IllegalArgumentException("Invalid requestId");
+        }
+        String sql = "UPDATE dbo.RoomRequests SET status = 'CHECKED_IN' WHERE id = ? AND status = 'APPROVED'";
         try (Connection con = getConnection(ctx); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, requestId);
             ps.executeUpdate();
