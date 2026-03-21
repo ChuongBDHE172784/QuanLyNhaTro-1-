@@ -9,7 +9,7 @@
     <!-- DB config -->
     <context-param>
         <param-name>DB_URL</param-name>
-        <param-value>jdbc:sqlserver://localhost:1433;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
     </context-param>
     <context-param>
         <param-name>DB_USER</param-name>
@@ -111,24 +111,6 @@
         <url-pattern>/student/reports</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>StudentDashboardServlet</servlet-name>
-        <servlet-class>nhatro.web.student.StudentDashboardServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentDashboardServlet</servlet-name>
-        <url-pattern>/student/dashboard</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StudentInvoicesServlet</servlet-name>
-        <servlet-class>nhatro.web.student.StudentInvoicesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentInvoicesServlet</servlet-name>
-        <url-pattern>/student/invoices</url-pattern>
-    </servlet-mapping>
-
     <!-- Admin: Approve/reject requests + create Contracts + update Room status -->
     <servlet>
         <servlet-name>AdminRequestsServlet</servlet-name>
@@ -173,33 +155,6 @@
     <servlet-mapping>
         <servlet-name>AdminReportServlet</servlet-name>
         <url-pattern>/admin/reports</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminDashboardServlet</servlet-name>
-        <servlet-class>nhatro.web.admin.AdminDashboardServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminDashboardServlet</servlet-name>
-        <url-pattern>/admin/dashboard</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminTenantServlet</servlet-name>
-        <servlet-class>nhatro.web.admin.AdminTenantServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminTenantServlet</servlet-name>
-        <url-pattern>/admin/tenants</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminBillingServlet</servlet-name>
-        <servlet-class>nhatro.web.admin.AdminBillingServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminBillingServlet</servlet-name>
-        <url-pattern>/admin/billing</url-pattern>
     </servlet-mapping>
 
     <!-- Filters -->
