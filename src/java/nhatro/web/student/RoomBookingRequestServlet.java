@@ -18,6 +18,16 @@ public class RoomBookingRequestServlet extends HttpServlet {
     private final RoomRequestDAO roomRequestDAO = new RoomRequestDAO();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            resp.sendRedirect(req.getContextPath() + "/auth/login");
+            return;
+        }
+        req.getRequestDispatcher("/webapp/views/student/room-booking.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
