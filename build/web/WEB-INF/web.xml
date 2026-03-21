@@ -9,7 +9,7 @@
     <!-- DB config -->
     <context-param>
         <param-name>DB_URL</param-name>
-        <param-value>jdbc:sqlserver://localhost:1433;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
     </context-param>
     <context-param>
         <param-name>DB_USER</param-name>
@@ -61,6 +61,15 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/auth/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>nhatro.web.auth.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/auth/register</url-pattern>
     </servlet-mapping>
 
     <!-- Admin: Rooms CRUD -->
