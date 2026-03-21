@@ -22,8 +22,8 @@
     <div class="col-6 col-md-2">
       <select class="form-select" name="roomType">
         <option value="">Loại phòng</option>
-        <option value="SINGLE" ${roomType == 'SINGLE' ? 'selected' : ''}>Phòng đơn</option>
-        <option value="STUDIO" ${roomType == 'STUDIO' ? 'selected' : ''}>Chung cư mini</option>
+        <option value="PHONG_DON" ${roomType == 'SINGLE' ? 'selected' : ''}>Phòng đơn</option>
+        <option value="CHUNG_CU_MINI" ${roomType == 'STUDIO' ? 'selected' : ''}>Chung cư mini</option>
       </select>
     </div>
     <div class="col-6 col-md-2">
