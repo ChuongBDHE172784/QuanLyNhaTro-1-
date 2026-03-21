@@ -43,8 +43,14 @@ public class RoomDAO {
             params.add(maxPrice);
         }
         if (roomType != null && !roomType.isBlank()) {
-            sql.append(" AND r.room_type = ?");
-            params.add(roomType.trim().toUpperCase());
+            String normalizedRoomType = normalizeRoomType(roomType);
+            if (normalizedRoomType == null) {
+                // Giá trị loại phòng không hợp lệ thì trả về rỗng thay vì bỏ lọc.
+                sql.append(" AND 1 = 0");
+            } else {
+                sql.append(" AND r.room_type = ?");
+                params.add(normalizedRoomType);
+            }
         }
         if (utilityKeyword != null && !utilityKeyword.isBlank()) {
             sql.append(" AND EXISTS (SELECT 1 FROM dbo.RoomUtilities ru2 INNER JOIN dbo.Utilities u2 ON u2.id = ru2.utility_id WHERE ru2.room_id = r.id AND u2.name LIKE ?)");
@@ -136,6 +142,19 @@ public class RoomDAO {
             ps.setInt(1, id);
             ps.executeUpdate();
         }
+    }
+
+    private String normalizeRoomType(String raw) {
+        if (raw == null) return null;
+        String upper = raw.trim().toUpperCase();
+        if (upper.isEmpty()) return null;
+        if ("SINGLE".equals(upper) || "PHONG_DON".equals(upper) || "PHONG DON".equals(upper) || "PHÒNG ĐƠN".equals(upper)) {
+            return "SINGLE";
+        }
+        if ("STUDIO".equals(upper) || "CHUNG_CU_MINI".equals(upper) || "CHUNG CU MINI".equals(upper) || "CHUNG CƯ MINI".equals(upper)) {
+            return "STUDIO";
+        }
+        return null;
     }
 }
 

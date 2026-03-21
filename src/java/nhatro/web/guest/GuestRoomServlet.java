@@ -34,10 +34,6 @@ public class GuestRoomServlet extends HttpServlet {
         Integer maxPrice = parseOptionalInt(req.getParameter("maxPrice"));
         String roomTypeRaw = req.getParameter("roomType");
         String roomType = normalizeRoomType(roomTypeRaw);
-        if (roomType == null && roomTypeRaw != null && !roomTypeRaw.trim().isEmpty()) {
-            // Fallback: vẫn áp dụng filter cho mọi giá trị khác rỗng.
-            roomType = roomTypeRaw.trim().toUpperCase();
-        }
         String utility = req.getParameter("utility");
         try {
             List<Room> rooms = roomDAO.listFiltered(getServletContext(), q, minPrice, maxPrice, roomType, utility);
@@ -92,10 +88,10 @@ public class GuestRoomServlet extends HttpServlet {
         String v = raw.trim();
         if (v.isEmpty()) return null;
         String upper = v.toUpperCase();
-        if ("SINGLE".equals(upper) || "PHONG DON".equals(upper) || "PHÒNG ĐƠN".equals(upper)) {
+        if ("SINGLE".equals(upper) || "PHONG_DON".equals(upper) || "PHONG DON".equals(upper) || "PHÒNG ĐƠN".equals(upper)) {
             return "SINGLE";
         }
-        if ("STUDIO".equals(upper) || "CHUNG CU MINI".equals(upper) || "CHUNG CƯ MINI".equals(upper)) {
+        if ("STUDIO".equals(upper) || "CHUNG_CU_MINI".equals(upper) || "CHUNG CU MINI".equals(upper) || "CHUNG CƯ MINI".equals(upper)) {
             return "STUDIO";
         }
         return null;
