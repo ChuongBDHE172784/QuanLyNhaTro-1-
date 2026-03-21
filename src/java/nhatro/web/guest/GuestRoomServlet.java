@@ -32,7 +32,12 @@ public class GuestRoomServlet extends HttpServlet {
         String q = req.getParameter("q");
         Integer minPrice = parseOptionalInt(req.getParameter("minPrice"));
         Integer maxPrice = parseOptionalInt(req.getParameter("maxPrice"));
-        String roomType = normalizeRoomType(req.getParameter("roomType"));
+        String roomTypeRaw = req.getParameter("roomType");
+        String roomType = normalizeRoomType(roomTypeRaw);
+        if (roomType == null && roomTypeRaw != null && !roomTypeRaw.trim().isEmpty()) {
+            // Fallback: vẫn áp dụng filter cho mọi giá trị khác rỗng.
+            roomType = roomTypeRaw.trim().toUpperCase();
+        }
         String utility = req.getParameter("utility");
         try {
             List<Room> rooms = roomDAO.listFiltered(getServletContext(), q, minPrice, maxPrice, roomType, utility);
