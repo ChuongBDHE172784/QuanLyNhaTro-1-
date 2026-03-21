@@ -9,7 +9,7 @@
     <!-- DB config -->
     <context-param>
         <param-name>DB_URL</param-name>
-        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+        <param-value>jdbc:sqlserver://localhost:1433;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
     </context-param>
     <context-param>
         <param-name>DB_USER</param-name>
@@ -17,7 +17,7 @@
     </context-param>
     <context-param>
         <param-name>DB_PASS</param-name>
-        <param-value>12345</param-value>
+        <param-value>123</param-value>
     </context-param>
 
     <welcome-file-list>

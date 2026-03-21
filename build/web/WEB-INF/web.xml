@@ -9,7 +9,7 @@
     <!-- DB config -->
     <context-param>
         <param-name>DB_URL</param-name>
-        <param-value>jdbc:sqlserver://DESKTOP-A00ECFS;instanceName=BUIDUCCHUONG;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
+        <param-value>jdbc:sqlserver://localhost:1433;databaseName=QuanLyNhaTro;encrypt=true;trustServerCertificate=true</param-value>
     </context-param>
     <context-param>
         <param-name>DB_USER</param-name>
@@ -17,7 +17,7 @@
     </context-param>
     <context-param>
         <param-name>DB_PASS</param-name>
-        <param-value>12345</param-value>
+        <param-value>123</param-value>
     </context-param>
 
     <welcome-file-list>
@@ -102,24 +102,6 @@
         <url-pattern>/student/reports</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>StudentProfileServlet</servlet-name>
-        <servlet-class>nhatro.web.student.StudentProfileServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentProfileServlet</servlet-name>
-        <url-pattern>/student/profile</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StudentReportServlet</servlet-name>
-        <servlet-class>nhatro.web.student.StudentReportServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentReportServlet</servlet-name>
-        <url-pattern>/student/reports</url-pattern>
-    </servlet-mapping>
-
     <!-- Admin: Approve/reject requests + create Contracts + update Room status -->
     <servlet>
         <servlet-name>AdminRequestsServlet</servlet-name>
@@ -146,24 +128,6 @@
     <servlet-mapping>
         <servlet-name>RejectRoomRequestServlet</servlet-name>
         <url-pattern>/admin/requests/reject</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CheckInRoomRequestServlet</servlet-name>
-        <servlet-class>nhatro.web.admin.CheckInRoomRequestServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CheckInRoomRequestServlet</servlet-name>
-        <url-pattern>/admin/requests/checkin</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminReportServlet</servlet-name>
-        <servlet-class>nhatro.web.admin.AdminReportServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminReportServlet</servlet-name>
-        <url-pattern>/admin/reports</url-pattern>
     </servlet-mapping>
 
     <servlet>
