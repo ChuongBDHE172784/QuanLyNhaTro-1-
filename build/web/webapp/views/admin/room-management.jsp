@@ -24,13 +24,6 @@
         <input class="form-control" name="q" value="${empty requestScope.q ? '' : requestScope.q}" placeholder="Mã phòng/khu..." />
         <button class="btn btn-outline-secondary" type="submit">Lọc</button>
       </form>
-      <div class="d-flex gap-2">
-        <select class="form-select" style="max-width: 180px;">
-          <option selected>Sắp xếp: Mới nhất</option>
-          <option>Giá tăng dần</option>
-          <option>Giá giảm dần</option>
-        </select>
-      </div>
     </div>
 
     <div class="table-responsive">

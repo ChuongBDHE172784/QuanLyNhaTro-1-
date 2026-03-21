@@ -9,11 +9,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Hóa đơn &amp; Dịch vụ</h1>
-    <div class="text-secondary">Nhập chỉ số điện/nước, xuất hóa đơn.</div>
-  </div>
-  <div class="d-flex gap-2">
-    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#meterModal">Nhập số điện/nước</button>
-    <button class="btn btn-primary" type="button">Xuất hóa đơn</button>
+    <div class="text-secondary">Danh sách chi phí theo hợp đồng hiện có.</div>
   </div>
 </div>
 
@@ -72,60 +68,6 @@
     <div class="d-flex justify-content-between align-items-center mt-3">
       <div class="small text-secondary">Tổng: <strong><c:out value="${fn:length(billingRows)}" /></strong> bản ghi</div>
       <ui:pagination page="1" totalPages="1" baseUrl="${pageContext.request.contextPath}/admin/billing" />
-    </div>
-  </div>
-</div>
-
-<!-- Modal: enter meter indexes -->
-<div class="modal fade" id="meterModal" tabindex="-1" aria-labelledby="meterModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title h5" id="meterModalLabel">Nhập chỉ số điện/nước</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-3">
-          <div class="col-12 col-md-6">
-            <label class="form-label">Phòng</label>
-            <select class="form-select">
-              <option selected>P12</option>
-              <option>P08</option>
-              <option>P03</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-6">
-            <label class="form-label">Tháng</label>
-            <input class="form-control" placeholder="03/2026" />
-          </div>
-
-          <div class="col-12 col-md-6">
-            <label class="form-label">Điện - Chỉ số đầu</label>
-            <input class="form-control" type="number" min="0" placeholder="1200" />
-          </div>
-          <div class="col-12 col-md-6">
-            <label class="form-label">Điện - Chỉ số cuối</label>
-            <input class="form-control" type="number" min="0" placeholder="1385" />
-          </div>
-
-          <div class="col-12 col-md-6">
-            <label class="form-label">Nước - Chỉ số đầu</label>
-            <input class="form-control" type="number" min="0" placeholder="305" />
-          </div>
-          <div class="col-12 col-md-6">
-            <label class="form-label">Nước - Chỉ số cuối</label>
-            <input class="form-control" type="number" min="0" placeholder="325" />
-          </div>
-        </form>
-
-        <div class="alert alert-info mt-3 mb-0">
-          Màn hình chỉ số điện/nước là phần mở rộng. Dữ liệu hiện tại lấy từ hợp đồng và tiền phòng.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary">Lưu chỉ số</button>
-      </div>
     </div>
   </div>
 </div>

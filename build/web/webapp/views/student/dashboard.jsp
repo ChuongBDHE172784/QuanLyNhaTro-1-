@@ -34,7 +34,7 @@
   <div class="col-12 col-md-4">
     <div class="card">
       <div class="card-body">
-        <div class="text-secondary small">Tiền phòng tháng này (tạm tính)</div>
+        <div class="text-secondary small">Tiền phòng / tháng</div>
         <div class="h5 mb-0 fw-bold text-primary">
           <c:choose>
             <c:when test="${not empty activeContract}">

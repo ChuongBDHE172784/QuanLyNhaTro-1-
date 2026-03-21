@@ -49,7 +49,7 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="agree" required />
               <label class="form-check-label" for="agree">
-                Tôi đồng ý với <a class="text-decoration-none" href="#">điều khoản</a>.
+                Tôi đồng ý với điều khoản sử dụng.
               </label>
               <div class="invalid-feedback">Bạn cần đồng ý điều khoản.</div>
             </div>

@@ -15,20 +15,7 @@
 
 <div class="card app-card">
   <div class="card-body">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center app-table-toolbar mb-3">
-      <div class="input-group" style="max-width: 520px;">
-        <span class="input-group-text">Tìm</span>
-        <input class="form-control" placeholder="Mã yêu cầu / phòng / tên SV..." />
-        <button class="btn btn-outline-secondary" type="button">Lọc</button>
-      </div>
-      <div class="d-flex gap-2">
-        <select class="form-select" style="max-width: 220px;">
-          <option selected>Trạng thái: Chờ duyệt</option>
-          <option>Đã duyệt</option>
-          <option>Đã từ chối</option>
-        </select>
-      </div>
-    </div>
+    <div class="small text-secondary mb-3">Danh sách yêu cầu thuê được lấy trực tiếp từ dữ liệu thực tế.</div>
 
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">

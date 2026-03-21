@@ -35,14 +35,6 @@
             <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
           </div>
 
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="remember" />
-              <label class="form-check-label" for="remember">Ghi nhớ</label>
-            </div>
-            <a class="small text-decoration-none" href="#">Quên mật khẩu?</a>
-          </div>
-
           <button class="btn btn-primary w-100" type="submit">Đăng nhập</button>
         </form>
 
