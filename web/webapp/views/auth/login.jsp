@@ -16,11 +16,11 @@
           </div>
         </c:if>
 
-        <div class="alert alert-info small">
-          Demo tài khoản:
-          <div><strong>Admin</strong>: admin@demo.com / 12345</div>
-          <div><strong>Student</strong>: student@demo.com / 12345</div>
-        </div>
+        <c:if test="${param.registered == '1'}">
+          <div class="alert alert-success" role="alert">
+            Đăng ký thành công. Vui lòng đăng nhập.
+          </div>
+        </c:if>
 
         <form action="${pageContext.request.contextPath}/auth/login" method="post" class="needs-validation" novalidate>
           <div class="mb-3">
@@ -49,7 +49,7 @@
         <hr class="my-4" />
         <div class="small text-secondary">
           Chưa có tài khoản?
-          <a class="text-decoration-none" href="${pageContext.request.contextPath}/webapp/views/auth/register.jsp">Đăng ký</a>
+          <a class="text-decoration-none" href="${pageContext.request.contextPath}/auth/register">Đăng ký</a>
         </div>
       </div>
     </div>

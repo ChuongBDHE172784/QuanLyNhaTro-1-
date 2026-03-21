@@ -1,17 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Hóa đơn" scope="request" />
 <jsp:include page="/webapp/views/common/header.jsp" />
 
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Hóa đơn</h1>
-    <div class="text-secondary">Xem danh sách hóa đơn và chi tiết điện/nước.</div>
+    <div class="text-secondary">Xem danh sách tiền phòng theo hợp đồng thực tế.</div>
   </div>
   <div class="d-flex gap-2">
-    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#meterModal">
-      Xem chi tiết điện/nước
-    </button>
+    <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/student/dashboard">Về Dashboard</a>
   </div>
 </div>
 
@@ -22,90 +21,39 @@
         <thead>
           <tr>
             <th>Mã</th>
-            <th>Tháng</th>
-            <th class="text-end">Tiền phòng</th>
-            <th class="text-end">Điện + Nước</th>
-            <th class="text-end">Tổng</th>
+            <th>Phòng</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th class="text-end">Tiền phòng / tháng</th>
             <th>Trạng thái</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="i" begin="1" end="6">
-            <tr>
-              <td>#INV-24<c:out value="${10 + i}" /></td>
-              <td>0<c:out value="${i}" />/2026</td>
-              <td class="text-end">2,500,000đ</td>
-              <td class="text-end">650,000đ</td>
-              <td class="text-end fw-semibold text-primary">3,150,000đ</td>
-              <td>
-                <span class="badge ${i == 1 ? 'text-bg-warning' : 'text-bg-success'}">
-                  <c:out value="${i == 1 ? 'Chưa thanh toán' : 'Đã thanh toán'}" />
-                </span>
-              </td>
-              <td class="text-end">
-                <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#meterModal">
-                  Xem chi tiết
-                </button>
-              </td>
-            </tr>
-          </c:forEach>
+          <c:choose>
+            <c:when test="${empty contracts}">
+              <tr>
+                <td colspan="6" class="text-center text-secondary py-4">Chưa có dữ liệu hợp đồng.</td>
+              </tr>
+            </c:when>
+            <c:otherwise>
+              <c:forEach var="c" items="${contracts}">
+                <tr>
+                  <td>#CT-<c:out value="${c.contractId}" /></td>
+                  <td><c:out value="${c.roomCode}" /></td>
+                  <td><c:out value="${c.startDate}" /></td>
+                  <td><c:out value="${c.endDate}" /></td>
+                  <td class="text-end"><fmt:formatNumber value="${c.priceMonth}" type="number" groupingUsed="true" />đ</td>
+                  <td>
+                    <span class="badge ${c.status == 'ACTIVE' ? 'text-bg-warning' : 'text-bg-success'}">
+                      <c:out value="${c.status}" />
+                    </span>
+                  </td>
+                </tr>
+              </c:forEach>
+            </c:otherwise>
+          </c:choose>
         </tbody>
       </table>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: meter details -->
-<div class="modal fade" id="meterModal" tabindex="-1" aria-labelledby="meterModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title h5" id="meterModalLabel">Chỉ số điện/nước</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row g-3">
-          <div class="col-12 col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <div class="fw-semibold mb-2">Điện</div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Chỉ số đầu</span><span>1200</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Chỉ số cuối</span><span>1385</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Tiêu thụ</span><span class="fw-semibold">185 kWh</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <div class="fw-semibold mb-2">Nước</div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Chỉ số đầu</span><span>305</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Chỉ số cuối</span><span>325</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span class="text-secondary">Tiêu thụ</span><span class="fw-semibold">20 m³</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="alert alert-info mt-3 mb-0">
-          (Demo) Khi làm backend: dữ liệu modal lấy theo hóa đơn được chọn.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-      </div>
     </div>
   </div>
 </div>

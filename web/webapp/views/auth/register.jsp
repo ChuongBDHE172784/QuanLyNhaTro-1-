@@ -10,21 +10,27 @@
         <h1 class="h4 fw-bold mb-1">Đăng ký tài khoản</h1>
         <p class="text-secondary mb-4">Tạo tài khoản để thuê phòng và theo dõi hóa đơn.</p>
 
-        <form action="#" method="post" class="row g-3 needs-validation" novalidate>
+        <c:if test="${not empty requestScope.error}">
+          <div class="alert alert-danger" role="alert">
+            <c:out value="${requestScope.error}" />
+          </div>
+        </c:if>
+
+        <form action="${pageContext.request.contextPath}/auth/register" method="post" class="row g-3 needs-validation" novalidate>
           <div class="col-12 col-md-6">
             <label class="form-label" for="fullName">Họ và tên</label>
-            <input class="form-control" id="fullName" name="fullName" required />
+            <input class="form-control" id="fullName" name="fullName" value="<c:out value='${requestScope.fullName}' />" required />
             <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
           </div>
           <div class="col-12 col-md-6">
             <label class="form-label" for="phone">Số điện thoại</label>
-            <input class="form-control" id="phone" name="phone" inputmode="tel" placeholder="09xxxxxxxx" required />
+            <input class="form-control" id="phone" name="phone" value="<c:out value='${requestScope.phone}' />" inputmode="tel" placeholder="09xxxxxxxx" required />
             <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
           </div>
 
           <div class="col-12">
             <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" placeholder="sv@example.com" required />
+            <input class="form-control" type="email" id="email" name="email" value="<c:out value='${requestScope.email}' />" placeholder="sv@example.com" required />
             <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
           </div>
 
@@ -57,7 +63,7 @@
         <hr class="my-4" />
         <div class="small text-secondary">
           Đã có tài khoản?
-          <a class="text-decoration-none" href="${pageContext.request.contextPath}/webapp/views/auth/login.jsp">Đăng nhập</a>
+          <a class="text-decoration-none" href="${pageContext.request.contextPath}/auth/login">Đăng nhập</a>
         </div>
       </div>
     </div>

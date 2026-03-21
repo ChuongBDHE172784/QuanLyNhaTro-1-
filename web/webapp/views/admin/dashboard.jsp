@@ -16,7 +16,7 @@
     <div class="card">
       <div class="card-body">
         <div class="text-secondary small">Phòng</div>
-        <div class="h4 mb-0 fw-bold">48</div>
+        <div class="h4 mb-0 fw-bold"><c:out value="${empty roomCount ? 0 : roomCount}" /></div>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
     <div class="card">
       <div class="card-body">
         <div class="text-secondary small">Đang thuê</div>
-        <div class="h4 mb-0 fw-bold">41</div>
+        <div class="h4 mb-0 fw-bold"><c:out value="${empty rentedCount ? 0 : rentedCount}" /></div>
       </div>
     </div>
   </div>
@@ -32,15 +32,15 @@
     <div class="card">
       <div class="card-body">
         <div class="text-secondary small">Yêu cầu thuê</div>
-        <div class="h4 mb-0 fw-bold text-warning">3</div>
+        <div class="h4 mb-0 fw-bold text-warning"><c:out value="${empty pendingRequestCount ? 0 : pendingRequestCount}" /></div>
       </div>
     </div>
   </div>
   <div class="col-12 col-md-3">
     <div class="card">
       <div class="card-body">
-        <div class="text-secondary small">Hóa đơn chưa TT</div>
-        <div class="h4 mb-0 fw-bold text-primary">6</div>
+        <div class="text-secondary small">Sự cố chưa xử lý</div>
+        <div class="h4 mb-0 fw-bold text-primary"><c:out value="${empty unresolvedReportCount ? 0 : unresolvedReportCount}" /></div>
       </div>
     </div>
   </div>
@@ -63,24 +63,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#REQ-203</td>
-                <td>P12</td>
-                <td>Nguyễn Văn A</td>
-                <td>18/03/2026</td>
-                <td class="text-end">
-                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/requests">Duyệt</a>
-                </td>
-              </tr>
-              <tr>
-                <td>#REQ-202</td>
-                <td>P08</td>
-                <td>Trần Thị B</td>
-                <td>17/03/2026</td>
-                <td class="text-end">
-                  <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/requests">Duyệt</a>
-                </td>
-              </tr>
+              <c:choose>
+                <c:when test="${empty recentRequests}">
+                  <tr>
+                    <td colspan="5" class="text-center text-secondary">Chưa có yêu cầu nào.</td>
+                  </tr>
+                </c:when>
+                <c:otherwise>
+                  <c:forEach var="r" items="${recentRequests}">
+                    <tr>
+                      <td>#REQ-<c:out value="${r.id}" /></td>
+                      <td><c:out value="${r.roomCode}" /></td>
+                      <td><c:out value="${r.studentName}" /></td>
+                      <td><c:out value="${r.moveInDate}" /></td>
+                      <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/requests">Duyệt</a>
+                      </td>
+                    </tr>
+                  </c:forEach>
+                </c:otherwise>
+              </c:choose>
             </tbody>
           </table>
         </div>
@@ -94,8 +96,8 @@
         <div class="fw-semibold mb-2">Tác vụ nhanh</div>
         <div class="d-grid gap-2">
           <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/rooms">Quản lý phòng</a>
-          <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/webapp/views/admin/billing.jsp">Nhập điện/nước</a>
-          <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/webapp/views/admin/tenant-management.jsp">Quản lý người thuê</a>
+          <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/billing">Nhập điện/nước</a>
+          <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/admin/tenants">Quản lý người thuê</a>
         </div>
       </div>
     </div>
