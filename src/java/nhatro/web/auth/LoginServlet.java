@@ -62,9 +62,9 @@ public class LoginServlet extends HttpServlet {
 
             // Redirect by role (demo)
             if ("ADMIN".equalsIgnoreCase(u.getRole())) {
-                resp.sendRedirect(req.getContextPath() + "/webapp/views/admin/dashboard.jsp");
+                resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
             } else {
-                resp.sendRedirect(req.getContextPath() + "/webapp/views/student/dashboard.jsp");
+                resp.sendRedirect(req.getContextPath() + "/student/dashboard");
             }
         } catch (SQLException e) {
             throw new ServletException("DB error during login", e);

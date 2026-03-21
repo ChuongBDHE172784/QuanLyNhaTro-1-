@@ -64,8 +64,8 @@ public class RoomBookingRequestServlet extends HttpServlet {
                     noteValue
             );
 
-            // Sau khi submit request, chuyển về trang tổng quan student (hiện đang là demo).
-            resp.sendRedirect(req.getContextPath() + "/webapp/views/student/dashboard.jsp");
+            // Sau khi submit request, chuyển về trang tổng quan student.
+            resp.sendRedirect(req.getContextPath() + "/student/dashboard");
         } catch (DateTimeParseException | SQLException | IllegalArgumentException e) {
             // Dữ liệu không hợp lệ => quay về trang phòng để demo mượt.
             resp.sendRedirect(req.getContextPath() + "/rooms");

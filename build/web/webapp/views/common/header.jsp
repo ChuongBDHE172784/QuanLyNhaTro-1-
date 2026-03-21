@@ -35,10 +35,10 @@
 
             <c:if test="${role == 'STUDENT'}">
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/student/dashboard.jsp">Dashboard</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/student/dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/student/invoices.jsp">Hóa đơn</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/student/invoices">Hóa đơn</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/student/reports">Hỗ trợ</a>
@@ -50,16 +50,16 @@
 
             <c:if test="${role == 'ADMIN'}">
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/dashboard.jsp">Admin</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/rooms">Phòng trọ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/tenant-management.jsp">Người thuê</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/tenants">Người thuê</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/webapp/views/admin/billing.jsp">Hóa đơn &amp; Dịch vụ</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/billing">Hóa đơn &amp; Dịch vụ</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/requests">Yêu cầu</a>
@@ -78,7 +78,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-light btn-sm ms-lg-2 mt-2 mt-lg-0" href="${pageContext.request.contextPath}/webapp/views/auth/register.jsp">
+                <a class="btn btn-light btn-sm ms-lg-2 mt-2 mt-lg-0" href="${pageContext.request.contextPath}/auth/register">
                   Đăng ký
                 </a>
               </li>
@@ -100,7 +100,7 @@
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/student/profile">Hồ sơ</a></li>
                   </c:if>
                   <c:if test="${role == 'ADMIN'}">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/webapp/views/admin/dashboard.jsp">Admin Dashboard</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/dashboard">Admin Dashboard</a></li>
                   </c:if>
                   <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/auth/logout">Đăng xuất</a></li>
                 </ul>

@@ -25,7 +25,9 @@
 
     <div class="d-flex flex-wrap gap-2 mt-3">
       <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/rooms">Xem tất cả phòng</a>
-      <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/webapp/views/auth/login.jsp">Đăng nhập</a>
+      <c:if test="${empty sessionScope.user}">
+        <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/auth/login">Đăng nhập</a>
+      </c:if>
     </div>
   </div>
 
