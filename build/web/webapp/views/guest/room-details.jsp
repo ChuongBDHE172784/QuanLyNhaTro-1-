@@ -79,7 +79,7 @@
                 </a>
               </c:when>
               <c:otherwise>
-                <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
+                <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/student/requests/create?roomId=${room.id}">
                   Thuê ngay
                 </a>
               </c:otherwise>
