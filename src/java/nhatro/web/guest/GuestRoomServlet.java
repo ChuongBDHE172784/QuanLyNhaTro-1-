@@ -32,7 +32,7 @@ public class GuestRoomServlet extends HttpServlet {
         String q = req.getParameter("q");
         Integer minPrice = parseOptionalInt(req.getParameter("minPrice"));
         Integer maxPrice = parseOptionalInt(req.getParameter("maxPrice"));
-        String roomType = req.getParameter("roomType");
+        String roomType = normalizeRoomType(req.getParameter("roomType"));
         String utility = req.getParameter("utility");
         try {
             List<Room> rooms = roomDAO.listFiltered(getServletContext(), q, minPrice, maxPrice, roomType, utility);
@@ -80,6 +80,20 @@ public class GuestRoomServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+
+    private String normalizeRoomType(String raw) {
+        if (raw == null) return null;
+        String v = raw.trim();
+        if (v.isEmpty()) return null;
+        String upper = v.toUpperCase();
+        if ("SINGLE".equals(upper) || "PHONG DON".equals(upper) || "PHÒNG ĐƠN".equals(upper)) {
+            return "SINGLE";
+        }
+        if ("STUDIO".equals(upper) || "CHUNG CU MINI".equals(upper) || "CHUNG CƯ MINI".equals(upper)) {
+            return "STUDIO";
+        }
+        return null;
     }
 }
 

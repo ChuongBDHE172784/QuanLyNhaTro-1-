@@ -29,16 +29,16 @@
 
           <div class="col-12 col-md-6">
             <label class="form-label" for="phone">Số điện thoại</label>
-            <input class="form-control" id="phone" name="phone" value="<c:out value='${profile.phone}' />" />
+            <input class="form-control" id="phone" name="phone" value="<c:out value='${profile.phone}' />" pattern="\\d{9,11}" maxlength="11" />
             <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
           </div>
           <div class="col-12">
             <label class="form-label" for="cccd">CCCD</label>
-            <input class="form-control" id="cccd" name="cccd" value="<c:out value='${profile.cccd}' />" />
+            <input class="form-control" id="cccd" name="cccd" value="<c:out value='${profile.cccd}' />" pattern="\\d{9,12}" maxlength="12" />
           </div>
           <div class="col-12">
             <label class="form-label" for="avatarUrl">Ảnh cá nhân (URL)</label>
-            <input class="form-control" id="avatarUrl" name="avatarUrl" value="<c:out value='${profile.avatarUrl}' />" />
+            <input class="form-control" id="avatarUrl" name="avatarUrl" value="<c:out value='${profile.avatarUrl}' />" maxlength="500" />
           </div>
 
           <div class="col-12 d-grid d-md-flex justify-content-md-end gap-2">

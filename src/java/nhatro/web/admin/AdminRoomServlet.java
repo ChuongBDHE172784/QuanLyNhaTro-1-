@@ -113,12 +113,21 @@ public class AdminRoomServlet extends HttpServlet {
         if (code == null || code.length() > 50) {
             throw new IllegalArgumentException("Invalid code");
         }
+        if (!code.matches("[A-Za-z0-9_-]{2,50}")) {
+            throw new IllegalArgumentException("Invalid code format");
+        }
         if (area == null) {
             throw new IllegalArgumentException("Invalid area");
+        }
+        if (area.length() > 255) {
+            throw new IllegalArgumentException("Area too long");
         }
         int priceMonth = parseNonNegativeInt(priceStr, "priceMonth");
         if (status == null || !isValidStatus(status)) {
             throw new IllegalArgumentException("Invalid status");
+        }
+        if (description != null && description.length() > 1000) {
+            throw new IllegalArgumentException("Description too long");
         }
 
         Room r = new Room();

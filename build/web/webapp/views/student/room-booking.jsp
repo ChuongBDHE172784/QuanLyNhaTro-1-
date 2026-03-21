@@ -55,6 +55,11 @@
 <script>
   (function () {
     "use strict";
+    const dateInput = document.getElementById("moveInDate");
+    if (dateInput) {
+      const today = new Date().toISOString().split("T")[0];
+      dateInput.min = today;
+    }
     const forms = document.querySelectorAll(".needs-validation");
     Array.from(forms).forEach((form) => {
       form.addEventListener(

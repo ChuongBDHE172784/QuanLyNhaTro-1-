@@ -40,10 +40,16 @@ public class RoomBookingRequestServlet extends HttpServlet {
 
             int roomId = parsePositiveInt(roomIdStr, "roomId");
             LocalDate moveInDate = parseDate(moveInDateStr);
+            if (moveInDate.isBefore(LocalDate.now())) {
+                throw new IllegalArgumentException("moveInDate must be today or later");
+            }
             int durationMonths = parsePositiveInt(durationStr, "duration");
             int peopleCount = parsePositiveInt(peopleCountStr, "peopleCount");
             if (durationMonths > 120) {
                 throw new IllegalArgumentException("duration too large");
+            }
+            if (peopleCount > 20) {
+                throw new IllegalArgumentException("peopleCount too large");
             }
 
             String noteValue = trimToNull(note);

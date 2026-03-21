@@ -41,9 +41,18 @@ public class StudentProfileServlet extends HttpServlet {
         String phone = trimToNull(req.getParameter("phone"));
         String cccd = trimToNull(req.getParameter("cccd"));
         String avatarUrl = trimToNull(req.getParameter("avatarUrl"));
-        if (phone != null && phone.length() > 20) phone = phone.substring(0, 20);
-        if (cccd != null && cccd.length() > 20) cccd = cccd.substring(0, 20);
-        if (avatarUrl != null && avatarUrl.length() > 500) avatarUrl = avatarUrl.substring(0, 500);
+        if (phone != null && !phone.matches("\\d{9,11}")) {
+            resp.sendRedirect(req.getContextPath() + "/student/profile?error=phone");
+            return;
+        }
+        if (cccd != null && !cccd.matches("\\d{9,12}")) {
+            resp.sendRedirect(req.getContextPath() + "/student/profile?error=cccd");
+            return;
+        }
+        if (avatarUrl != null && avatarUrl.length() > 500) {
+            resp.sendRedirect(req.getContextPath() + "/student/profile?error=avatar");
+            return;
+        }
         try {
             userDAO.updateStudentProfile(getServletContext(), user.getId(), phone, cccd, avatarUrl);
             resp.sendRedirect(req.getContextPath() + "/student/profile?updated=1");

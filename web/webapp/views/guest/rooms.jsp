@@ -70,7 +70,13 @@
                 </div>
               </div>
               <div class="small text-secondary mt-2">
-                Loại: <strong><c:out value="${empty r.roomType ? 'SINGLE' : r.roomType}" /></strong>
+                Loại:
+                <strong>
+                  <c:choose>
+                    <c:when test="${r.roomType == 'STUDIO'}">Chung cư mini</c:when>
+                    <c:otherwise>Phòng đơn</c:otherwise>
+                  </c:choose>
+                </strong>
               </div>
               <div class="small text-secondary">
                 Tiện ích: <c:out value="${empty r.utilitiesSummary ? 'Chưa cập nhật' : r.utilitiesSummary}" />

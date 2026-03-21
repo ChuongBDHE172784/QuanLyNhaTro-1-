@@ -65,6 +65,9 @@ public class RoomRequestDAO {
         if (moveInDate == null) {
             throw new IllegalArgumentException("Missing moveInDate");
         }
+        if (moveInDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("moveInDate must be today or later");
+        }
         if (durationMonths <= 0) {
             throw new IllegalArgumentException("Invalid durationMonths");
         }

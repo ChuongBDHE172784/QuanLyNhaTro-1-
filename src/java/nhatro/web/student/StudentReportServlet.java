@@ -47,6 +47,10 @@ public class StudentReportServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/student/reports");
             return;
         }
+        if (title.length() > 255 || desc.length() > 1000) {
+            resp.sendRedirect(req.getContextPath() + "/student/reports?error=length");
+            return;
+        }
         priority = priority.toUpperCase();
         if (!("LOW".equals(priority) || "MEDIUM".equals(priority) || "HIGH".equals(priority))) {
             priority = "MEDIUM";

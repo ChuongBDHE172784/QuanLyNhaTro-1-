@@ -29,13 +29,13 @@
 
           <div class="col-12">
             <label class="form-label" for="title">Tiêu đề</label>
-            <input class="form-control" id="title" name="title" placeholder="Ví dụ: Rò rỉ nước nhà vệ sinh" required />
+            <input class="form-control" id="title" name="title" maxlength="255" placeholder="Ví dụ: Rò rỉ nước nhà vệ sinh" required />
             <div class="invalid-feedback">Vui lòng nhập tiêu đề.</div>
           </div>
 
           <div class="col-12">
             <label class="form-label" for="desc">Mô tả</label>
-            <textarea class="form-control" id="desc" name="desc" rows="4" placeholder="Mô tả chi tiết tình trạng..." required></textarea>
+            <textarea class="form-control" id="desc" name="desc" maxlength="1000" rows="4" placeholder="Mô tả chi tiết tình trạng..." required></textarea>
             <div class="invalid-feedback">Vui lòng nhập mô tả.</div>
           </div>
 

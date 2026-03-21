@@ -41,6 +41,15 @@
               <fmt:formatNumber value="${room.priceMonth}" type="number" groupingUsed="true" />đ
             </div>
           </div>
+          <div class="col-6">
+            <div class="small text-secondary">Loại phòng</div>
+            <div class="fw-semibold">
+              <c:choose>
+                <c:when test="${room.roomType == 'STUDIO'}">Chung cư mini</c:when>
+                <c:otherwise>Phòng đơn</c:otherwise>
+              </c:choose>
+            </div>
+          </div>
         </div>
         <c:if test="${not empty room.description}">
           <hr />
@@ -75,7 +84,14 @@
               Phòng không thể thuê
             </button>
             <div class="small text-secondary mt-3">
-              Hiện trạng: <strong><c:out value="${room.status}" /></strong>
+              Hiện trạng:
+              <strong>
+                <c:choose>
+                  <c:when test="${room.status == 'RENTED'}">Đã thuê</c:when>
+                  <c:when test="${room.status == 'MAINTENANCE'}">Bảo trì</c:when>
+                  <c:otherwise>Còn trống</c:otherwise>
+                </c:choose>
+              </strong>
             </div>
           </c:otherwise>
         </c:choose>
