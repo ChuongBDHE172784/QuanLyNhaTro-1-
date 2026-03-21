@@ -50,7 +50,7 @@
   <div class="col-12 col-lg-7">
     <div class="card">
       <div class="card-body">
-        <div class="fw-semibold mb-2">Yêu cầu thuê gần đây (demo)</div>
+        <div class="fw-semibold mb-2">Yêu cầu thuê gần đây</div>
         <div class="table-responsive">
           <table class="table align-middle mb-0">
             <thead>

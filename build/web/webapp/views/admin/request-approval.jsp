@@ -8,7 +8,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Duyệt yêu cầu thuê phòng</h1>
-    <div class="text-secondary">Xác nhận hoặc từ chối yêu cầu thuê (từ DB).</div>
+    <div class="text-secondary">Xác nhận hoặc từ chối yêu cầu thuê.</div>
   </div>
   <span class="badge text-bg-danger">Admin</span>
 </div>

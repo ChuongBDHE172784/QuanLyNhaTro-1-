@@ -82,7 +82,7 @@
   <div class="col-12 col-lg-5">
     <div class="card app-card">
       <div class="card-body">
-        <div class="fw-semibold mb-2">Thông tin hợp đồng (demo)</div>
+        <div class="fw-semibold mb-2">Thông tin hợp đồng</div>
         <div class="small text-secondary">Ngày bắt đầu: 01/01/2026</div>
         <div class="small text-secondary">Chu kỳ thanh toán: hàng tháng</div>
         <hr />

@@ -47,9 +47,6 @@
           </div>
         </form>
 
-        <div class="alert alert-info mt-4 mb-0">
-          Submit sẽ tạo <strong>RoomRequest</strong> trong DB để Admin duyệt.
-        </div>
       </div>
     </div>
   </div>

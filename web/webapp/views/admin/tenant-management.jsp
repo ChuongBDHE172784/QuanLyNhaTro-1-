@@ -7,7 +7,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Quản lý người thuê</h1>
-    <div class="text-secondary">Danh sách sinh viên đang thuê (UI demo).</div>
+    <div class="text-secondary">Danh sách sinh viên đang thuê.</div>
   </div>
   <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#tenantModal">
     Thêm người thuê

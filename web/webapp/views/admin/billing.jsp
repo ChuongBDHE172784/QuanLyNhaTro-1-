@@ -7,7 +7,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Hóa đơn &amp; Dịch vụ</h1>
-    <div class="text-secondary">Nhập chỉ số điện/nước, xuất hóa đơn (UI demo).</div>
+    <div class="text-secondary">Nhập chỉ số điện/nước, xuất hóa đơn.</div>
   </div>
   <div class="d-flex gap-2">
     <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#meterModal">Nhập số điện/nước</button>

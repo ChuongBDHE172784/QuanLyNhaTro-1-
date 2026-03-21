@@ -9,7 +9,7 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
   <div>
     <h1 class="h4 fw-bold mb-1">Quản lý phòng trọ</h1>
-    <div class="text-secondary">CRUD phòng (từ DB).</div>
+    <div class="text-secondary">Quản lý danh sách phòng trọ.</div>
   </div>
   <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#roomModal">
     Thêm mới
