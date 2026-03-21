@@ -10,7 +10,7 @@
     <div class="text-secondary">Chọn phòng phù hợp và xem chi tiết.</div>
   </div>
   <form class="row g-2" action="${pageContext.request.contextPath}/rooms" method="get" role="search">
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-3">
       <input class="form-control" name="q" placeholder="Tìm theo mã/khu vực..." value="<c:out value='${q}' />" />
     </div>
     <div class="col-6 col-md-2">
@@ -22,15 +22,15 @@
     <div class="col-6 col-md-2">
       <select class="form-select" name="roomType">
         <option value="">Loại phòng</option>
-        <option value="PHONG_DON" ${roomType == 'SINGLE' ? 'selected' : ''}>Phòng đơn</option>
-        <option value="CHUNG_CU_MINI" ${roomType == 'STUDIO' ? 'selected' : ''}>Chung cư mini</option>
+        <option value="SINGLE" ${roomType == 'SINGLE' ? 'selected' : ''}>Phòng đơn</option>
+        <option value="STUDIO" ${roomType == 'STUDIO' ? 'selected' : ''}>Chung cư mini</option>
       </select>
     </div>
-    <div class="col-6 col-md-2">
-      <input class="form-control" name="utility" placeholder="Tiện ích" value="<c:out value='${utility}' />" />
-    </div>
-    <div class="col-12 d-grid d-md-block">
-      <button class="btn btn-outline-primary" type="submit">Lọc nhanh</button>
+    <div class="col-12 col-md-3">
+      <div class="d-flex gap-2">
+        <input class="form-control" name="utility" placeholder="Tiện ích" value="<c:out value='${utility}' />" />
+        <button class="btn btn-outline-primary text-nowrap" type="submit">Lọc nhanh</button>
+      </div>
     </div>
   </form>
 </div>
