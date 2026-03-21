@@ -16,6 +16,19 @@
   </button>
 </div>
 
+<c:if test="${param.status == 'created'}">
+  <div class="alert alert-success" role="alert">Thêm phòng thành công.</div>
+</c:if>
+<c:if test="${param.status == 'updated'}">
+  <div class="alert alert-success" role="alert">Cập nhật phòng thành công.</div>
+</c:if>
+<c:if test="${param.status == 'deleted'}">
+  <div class="alert alert-success" role="alert">Xóa phòng thành công.</div>
+</c:if>
+<c:if test="${param.status == 'error'}">
+  <div class="alert alert-danger" role="alert">Thao tác thất bại. Vui lòng kiểm tra dữ liệu và thử lại.</div>
+</c:if>
+
 <div class="card">
   <div class="card-body">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center app-table-toolbar mb-3">

@@ -13,6 +13,13 @@
       <span class="badge text-bg-primary">Student</span>
     </div>
 
+    <c:if test="${param.created == '1'}">
+      <div class="alert alert-success" role="alert">Gửi yêu cầu hỗ trợ thành công.</div>
+    </c:if>
+    <c:if test="${param.error == 'length'}">
+      <div class="alert alert-danger" role="alert">Tiêu đề hoặc mô tả vượt quá giới hạn ký tự.</div>
+    </c:if>
+
     <div class="card app-card">
       <div class="card-body p-4">
         <form action="${pageContext.request.contextPath}/student/reports" method="post" class="row g-3 needs-validation" novalidate>

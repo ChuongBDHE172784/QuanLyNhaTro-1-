@@ -38,22 +38,34 @@ public class StudentProfileServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/auth/login");
             return;
         }
-        String phone = trimToNull(req.getParameter("phone"));
-        String cccd = trimToNull(req.getParameter("cccd"));
-        String avatarUrl = trimToNull(req.getParameter("avatarUrl"));
-        if (phone != null && !phone.matches("\\d{9,11}")) {
-            resp.sendRedirect(req.getContextPath() + "/student/profile?error=phone");
-            return;
-        }
-        if (cccd != null && !cccd.matches("\\d{9,12}")) {
-            resp.sendRedirect(req.getContextPath() + "/student/profile?error=cccd");
-            return;
-        }
-        if (avatarUrl != null && avatarUrl.length() > 500) {
-            resp.sendRedirect(req.getContextPath() + "/student/profile?error=avatar");
-            return;
-        }
         try {
+            User currentProfile = userDAO.findById(getServletContext(), user.getId());
+            if (currentProfile == null) {
+                resp.sendRedirect(req.getContextPath() + "/auth/login");
+                return;
+            }
+
+            String phone = trimToNull(req.getParameter("phone"));
+            String cccd = trimToNull(req.getParameter("cccd"));
+            String avatarUrl = trimToNull(req.getParameter("avatarUrl"));
+
+            String currentPhone = trimToNull(currentProfile.getPhone());
+            boolean phoneChanged = !isEqualNullable(phone, currentPhone);
+
+            // Only validate phone format when user actually changes it.
+            if (phoneChanged && phone != null && !phone.matches("\\d{9,11}")) {
+                resp.sendRedirect(req.getContextPath() + "/student/profile?error=phone");
+                return;
+            }
+            if (cccd != null && !cccd.matches("\\d{9,12}")) {
+                resp.sendRedirect(req.getContextPath() + "/student/profile?error=cccd");
+                return;
+            }
+            if (avatarUrl != null && avatarUrl.length() > 500) {
+                resp.sendRedirect(req.getContextPath() + "/student/profile?error=avatar");
+                return;
+            }
+
             userDAO.updateStudentProfile(getServletContext(), user.getId(), phone, cccd, avatarUrl);
             resp.sendRedirect(req.getContextPath() + "/student/profile?updated=1");
         } catch (SQLException e) {
@@ -72,5 +84,12 @@ public class StudentProfileServlet extends HttpServlet {
         if (s == null) return null;
         String t = s.trim();
         return t.isEmpty() ? null : t;
+    }
+
+    private boolean isEqualNullable(String a, String b) {
+        if (a == null) {
+            return b == null;
+        }
+        return a.equals(b);
     }
 }

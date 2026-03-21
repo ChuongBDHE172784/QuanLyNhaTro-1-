@@ -48,7 +48,7 @@ public class AdminRoomServlet extends HttpServlet {
             }
         } catch (SQLException | IllegalArgumentException e) {
             // Tránh 500 khi user nhập sai dữ liệu; quay lại list để demo mượt.
-            resp.sendRedirect(req.getContextPath() + "/admin/rooms");
+            resp.sendRedirect(req.getContextPath() + "/admin/rooms?status=error");
         }
     }
 
@@ -87,20 +87,20 @@ public class AdminRoomServlet extends HttpServlet {
     private void handleCreate(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
         Room r = readRoomFromRequest(req, 0);
         roomDAO.create(getServletContext(), r);
-        resp.sendRedirect(req.getContextPath() + "/admin/rooms");
+        resp.sendRedirect(req.getContextPath() + "/admin/rooms?status=created");
     }
 
     private void handleUpdate(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
         int id = parsePositiveInt(req.getParameter("id"), "id");
         Room r = readRoomFromRequest(req, id);
         roomDAO.update(getServletContext(), r);
-        resp.sendRedirect(req.getContextPath() + "/admin/rooms");
+        resp.sendRedirect(req.getContextPath() + "/admin/rooms?status=updated");
     }
 
     private void handleDelete(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
         int id = parsePositiveInt(req.getParameter("id"), "id");
         roomDAO.delete(getServletContext(), id);
-        resp.sendRedirect(req.getContextPath() + "/admin/rooms");
+        resp.sendRedirect(req.getContextPath() + "/admin/rooms?status=deleted");
     }
 
     private Room readRoomFromRequest(HttpServletRequest req, int id) {
