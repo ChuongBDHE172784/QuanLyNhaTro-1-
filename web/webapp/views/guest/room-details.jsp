@@ -72,9 +72,18 @@
         </p>
         <c:choose>
           <c:when test="${room.status == 'AVAILABLE'}">
-            <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
-              Thuê ngay
-            </a>
+            <c:choose>
+              <c:when test="${empty sessionScope.user}">
+                <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/auth/login">
+                  Đăng nhập để thuê
+                </a>
+              </c:when>
+              <c:otherwise>
+                <a class="btn btn-primary w-100" href="${pageContext.request.contextPath}/webapp/views/student/room-booking.jsp?roomId=${room.id}">
+                  Thuê ngay
+                </a>
+              </c:otherwise>
+            </c:choose>
             <div class="small text-secondary mt-3">
               Gửi yêu cầu và chờ Admin duyệt.
             </div>
