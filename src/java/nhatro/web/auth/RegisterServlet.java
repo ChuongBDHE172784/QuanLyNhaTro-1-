@@ -62,21 +62,8 @@ public class RegisterServlet extends HttpServlet {
         }
 
         try {
-            boolean emailExists = userDAO.existsByEmail(getServletContext(), email);
-            boolean phoneExists = userDAO.existsByPhone(getServletContext(), phone);
-
-            if (emailExists && phoneExists) {
-                req.setAttribute("error", "Email và số điện thoại này đã tồn tại trong hệ thống.");
-                doGet(req, resp);
-                return;
-            }
-            if (emailExists) {
-                req.setAttribute("error", "Email này đã tồn tại trong hệ thống.");
-                doGet(req, resp);
-                return;
-            }
-            if (phoneExists) {
-                req.setAttribute("error", "Số điện thoại này đã tồn tại trong hệ thống.");
+            if (userDAO.existsByEmail(getServletContext(), email)) {
+                req.setAttribute("error", "Email đã tồn tại.");
                 doGet(req, resp);
                 return;
             }
