@@ -63,7 +63,12 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             if (userDAO.existsByEmail(getServletContext(), email)) {
-                req.setAttribute("error", "Email đã tồn tại.");
+                req.setAttribute("error", "Email này đã tồn tại trong hệ thống.");
+                doGet(req, resp);
+                return;
+            }
+            if (userDAO.existsByPhone(getServletContext(), phone)) {
+                req.setAttribute("error", "Số điện thoại này đã tồn tại trong hệ thống.");
                 doGet(req, resp);
                 return;
             }

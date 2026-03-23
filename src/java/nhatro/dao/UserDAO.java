@@ -73,6 +73,16 @@ public class UserDAO {
         }
     }
 
+    public boolean existsByPhone(ServletContext ctx, String phone) throws SQLException {
+        String sql = "SELECT 1 FROM dbo.[User] WHERE phone = ?";
+        try (Connection con = getConnection(ctx); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, phone);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
     public void createStudent(ServletContext ctx, String email, String password, String fullName, String phone) throws SQLException {
         String sql = "INSERT INTO dbo.[User](email, password, full_name, role, phone) VALUES (?, ?, ?, 'STUDENT', ?)";
         try (Connection con = getConnection(ctx); PreparedStatement ps = con.prepareStatement(sql)) {
